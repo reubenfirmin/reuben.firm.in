@@ -1752,11 +1752,15 @@ body {
   text-align: center;
   visibility: hidden;
   -webkit-transition: visibility 0s .2s;
-  transition: visibility 0s .2s
+  transition: visibility 0s .2s;
 }
 
 .outer-nav.is-vis {
-  visibility: visible
+  visibility: visible;
+}
+
+.outer-nav.is-vis::before {
+  bottom: 20px;
 }
 
 .outer-nav--return {
@@ -1802,7 +1806,7 @@ body {
 .outer-nav > li::before {
   content: "";
   position: absolute;
-  top: 50%;
+  top: 100%;
   left: 50%;
   -webkit-transform: translate(-50%, -25%);
   transform: translate(-50%, -25%);
