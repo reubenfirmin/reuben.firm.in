@@ -255,7 +255,7 @@ $( document ).ready(function() {
       else if ($this.hasClass('slider--item-right')) {
         slideRight();
       }
-      
+
     }, 400);
 
     $('.slider').animate({ opacity : 1 }, 400);
