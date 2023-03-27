@@ -1,5 +1,3 @@
-// @codekit-prepend "/vendor/hammer-2.0.8.js";
-
 $( document ).ready(function() {
 
   // DOMMouseScroll included for firefox support
@@ -64,8 +62,7 @@ $( document ).ready(function() {
   });
 
   // swipe support for touch devices
-  var targetElement = document.getElementById('viewport'),
-      mc = new Hammer(targetElement);
+  var targetElement = document.getElementById('viewport'), mc = new Hammer(targetElement);
   mc.get('swipe').set({ direction: Hammer.DIRECTION_VERTICAL });
   mc.on('swipeup swipedown', function(e) {
 
@@ -177,7 +174,7 @@ $( document ).ready(function() {
 
   function workSlider() {
 
-    $('.slider--prev, .slider--next').click(function() {
+    $('.slider--prev, .slider--next, .slider--item').click(function() {
 
       var $this = $(this),
           curLeft = $('.slider').find('.slider--item-left'),
@@ -196,7 +193,7 @@ $( document ).ready(function() {
 
       setTimeout(function(){
 
-      if ($this.hasClass('slider--next')) {
+      function slideRight() {
         if (curLeftPos < totalWorks - 1 && curCenterPos < totalWorks - 1 && curRightPos < totalWorks - 1) {
           $left.removeClass('slider--item-left').next().addClass('slider--item-left');
           $center.removeClass('slider--item-center').next().addClass('slider--item-center');
@@ -220,7 +217,8 @@ $( document ).ready(function() {
           }
         }
       }
-      else {
+
+      function slideLeft() {
         if (curLeftPos !== 0 && curCenterPos !== 0 && curRightPos !== 0) {
           $left.removeClass('slider--item-left').prev().addClass('slider--item-left');
           $center.removeClass('slider--item-center').prev().addClass('slider--item-center');
@@ -245,6 +243,19 @@ $( document ).ready(function() {
         }
       }
 
+      if ($this.hasClass('slider--next')) {
+        slideRight();
+      }
+      else if ($this.hasClass('slider--prev')) {
+        slideLeft();
+      }
+      else if ($this.hasClass('slider--item-left')) {
+        slideLeft();
+      }
+      else if ($this.hasClass('slider--item-right')) {
+        slideRight();
+      }
+      
     }, 400);
 
     $('.slider').animate({ opacity : 1 }, 400);
