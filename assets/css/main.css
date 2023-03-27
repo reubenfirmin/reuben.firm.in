@@ -1180,9 +1180,27 @@ body {
 }
 
 .about--banner img {
+  /*position: absolute;*/
+  /*bottom: -90px;*/
+  /*right: -12px;*/
+  /*z-index: -1;*/
+  display: none;
+  filter: grayscale(100%);
+  /*position: relative;*/
+}
+
+.pickgradient {
   position: absolute;
-  bottom: -90px;
-  right: -12px
+  display:block;
+  bottom: -50px;
+  right: -12px;
+  width: 500px;
+  height: 500px;
+  /* Created with https://www.css-gradient.com */
+  background: #FAFAFA;
+  background: radial-gradient(circle at -20% 30%, rgba(12,12,12,1) 30%, rgba(251,249,249,0) 54%, rgba(12,12,12,1) 84%), url("../img/open-source.png");
+  background-size: cover;
+  filter: grayscale(100%);
 }
 
 .about--options {
@@ -1206,31 +1224,32 @@ body {
   height: 75px;
   text-decoration: none;
   color: #fff;
-  border: 10px solid #0f33ff;
+  border: 5px solid #0f33ff;
   background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat
+  background-repeat: no-repeat;
 }
 
 .about--options > a:nth-child(1) {
-  background-image: url("../img/about-winners.jpg")
+  background: radial-gradient(circle, rgba(63,94,251,0.3) 0%, rgba(5,5,5,0.8) 82%), url("../img/about-tdz.png");
+  background-size: cover;
 }
 
 .about--options > a:nth-child(2) {
-  background-image: url("../img/about-philosophy.jpg")
+  background: radial-gradient(circle, rgba(63,94,251,0.3) 0%, rgba(5,5,5,0.8) 82%), url("../img/about-sz.png");
+  background-size: cover;
 }
 
 .about--options > a:nth-child(3) {
-  background-image: url("../img/about-history.jpg")
+  background: radial-gradient(circle, rgba(63,94,251,0.3) 0%, rgba(5,5,5,0.8) 82%), url("../img/about-diy.png");
+  background-size: cover;
 }
 
 .about--options > a:hover h3 {
-  bottom: -50px
+  top: 5px;
 }
 
 .about--options h3 {
   position: absolute;
-  bottom: -38px;
   left: 10px;
   font-size: 16px;
   text-transform: uppercase;
