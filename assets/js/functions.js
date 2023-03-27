@@ -27,15 +27,11 @@ $( document ).ready(function() {
         }, 800);
         updateHelper(-1);
       }
-
     }
-
   });
 
   $('.side-nav li, .outer-nav li').click(function(){
-
     if (!($(this).hasClass('is-active'))) {
-
       var $this = $(this),
           curActive = $this.parent().find('.is-active'),
           curPos = $this.parent().children().index(curActive),
@@ -265,9 +261,7 @@ $( document ).ready(function() {
   }
 
   function transitionLabels() {
-
     $('.work-request--information input').focusout(function(){
-
       var textVal = $(this).val();
 
       if (textVal === "") {
@@ -279,13 +273,20 @@ $( document ).ready(function() {
 
       // correct mobile device window position
       window.scrollTo(0, 0);
-
     });
+  }
 
+  function openSource() {
+    $('.about--option').hover(function() {
+      $('.pickgradient').addClass('selected');
+    }, function () {
+      $('.pickgradient').removeClass('selected');
+    });
   }
 
   outerNav();
   workSlider();
+  openSource();
   transitionLabels();
 
 });

@@ -1203,6 +1203,12 @@ body {
   filter: grayscale(100%);
 }
 
+.pickgradient.selected {
+  background: radial-gradient(circle at -20% 30%, rgba(12,12,12,1) 20%, rgba(251,249,249,0) 54%, rgba(12,12,12,1) 94%), url("../img/open-source.png");
+  background-size: cover;
+  filter: grayscale(0%);
+}
+
 .about--options {
   display: -webkit-box;
   display: -webkit-flex;
