@@ -141,7 +141,30 @@ $( document ).ready(function() {
     else {
       $('.header--cta').removeClass('is-active');
     }
+  }
 
+  function blinky() {
+    const links = $('.intro--options > a');
+    const delay = 4000;
+    let i = 0;
+
+    function animateColor() {
+      if (i > 0) {
+        links.eq(i-1).removeClass("featured");
+      } else {
+        links.eq(links.length -1).removeClass("featured");
+      }
+      links.eq(i).addClass("featured");
+      console.log(links.eq(i).html())
+      i++;
+
+      if (i >= links.length) {
+        i = 0;
+      }
+      setTimeout(animateColor, delay);
+    }
+
+    animateColor();
   }
 
   function outerNav() {
@@ -288,5 +311,6 @@ $( document ).ready(function() {
   workSlider();
   openSource();
   transitionLabels();
+  blinky();
 
 });

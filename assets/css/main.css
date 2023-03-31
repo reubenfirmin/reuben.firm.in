@@ -763,11 +763,15 @@ body {
   max-width: 250px;
   text-decoration: none;
   color: #282828;
-  -webkit-transition: color .2s ease-in-out;
-  transition: color .2s ease-in-out
+  -webkit-transition: color .4s ease-in-out;
+  transition: color .4s ease-in-out
 }
 
 .intro--options > a:hover {
+  color: #fff
+}
+
+.intro--options .featured {
   color: #fff
 }
 
