@@ -1234,8 +1234,9 @@ body {
   height: 75px;
   text-decoration: none;
   color: #fff;
-  border: 5px solid #0f33ff;
+  /*border: 5px solid #0f33ff;*/
   background-position: center;
+  background-size: cover;
   background-repeat: no-repeat;
 }
 
@@ -1250,6 +1251,11 @@ body {
 }
 
 .about--options > a:nth-child(3) {
+  background: radial-gradient(circle, rgba(63,94,251,0.3) 0%, rgba(5,5,5,0.8) 82%), url("../img/about-bot.jpg");
+  background-size: cover;
+}
+
+.about--options > a:nth-child(4) {
   background: radial-gradient(circle, rgba(63,94,251,0.3) 0%, rgba(5,5,5,0.8) 82%), url("../img/about-diy.png");
   background-size: cover;
 }
