@@ -7,11 +7,8 @@ import org.w3c.dom.events.Event
 import org.w3c.dom.events.MouseEvent
 import kotlin.random.Random
 
-/**
- * The site's client-side polish, all queried off typed [CssClasses] / [Attrs] markers: scroll-reveal
- * (+ metric count-up), the hero's decrypt-in text, magnetic CTAs, and card tilt. Everything degrades
- * to a static, final state under `prefers-reduced-motion`.
- */
+/** The site's client-side behaviour: the hero terminal, testimonial spotlight, project + timeline
+ *  accordions, the skills constellation, and magnetic CTAs. */
 object Effects {
 
     private const val GLYPHS = "abcdefghijklmnopqrstuvwxyz/_.:>#*01"
@@ -21,8 +18,7 @@ object Effects {
         spotlight()
         projects()
         timeline()
-        // Guarded: the constellation needs WebGL; without it (headless tests, old browsers) the rest
-        // of the page must still render.
+        // Skip the constellation if WebGL isn't available.
         try { SkillsGl.init() } catch (e: Throwable) { }
         magnetic()
     }

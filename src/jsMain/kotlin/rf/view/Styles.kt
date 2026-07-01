@@ -4,11 +4,7 @@ import kotlinx.css.*
 import kotlinx.css.properties.*
 import zoned.framework.interop.*
 
-/**
- * Shared, selector-based CSS injected once into <head>. Selectors, pseudo-elements, hover/active
- * states, keyframes, and responsive/preference media queries. Fully typed: every value reads
- * [Tokens] and every property is typed kotlin-css or a typed zoned helper. No raw CSS strings.
- */
+/** Selector-based CSS injected once into <head>: rules, pseudo-elements, states, keyframes, media queries. */
 object Styles {
 
     fun inject() {
@@ -333,17 +329,17 @@ object Styles {
                 display = Display.flex
                 flexWrap = FlexWrap.wrap
                 justifyContent = JustifyContent.center
-                gap = 8.px
+                gap = 10.px
             }
             rule(".${CssClasses.SPOTLIGHT_CHIP}") {
-                width = 30.px; height = 30.px
+                width = 40.px; height = 40.px
                 borderRadius = 50.pct
                 border = Border(1.px, BorderStyle.solid, Tokens.LINE)
                 display = Display.flex
                 alignItems = Align.center
                 justifyContent = JustifyContent.center
                 fontFamily = Tokens.MONO
-                fontSize = 12.px
+                fontSize = 15.px
                 color = Tokens.MUTED
                 cursor = Cursor.pointer
                 userSelect = UserSelect.none
@@ -598,7 +594,6 @@ object Styles {
                 userSelect = UserSelect.none
             }
             rule(".${CssClasses.SKILLS_STAGE}:active") { cursor = Cursor.grabbing }
-            // Renderer canvases fill the stage (typed here rather than as inline style strings).
             rule(".${CssClasses.SKILLS_CANVAS}") {
                 position = Position.absolute
                 top = 0.px; left = 0.px

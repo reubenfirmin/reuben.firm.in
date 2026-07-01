@@ -27,10 +27,7 @@ object DomIds {
     const val APP_ROOT = "app-root"
 }
 
-/**
- * Typed names for the `data-*` attributes that mark elements for [Effects] / [SectionNavigator] to
- * enhance. Kept out of raw strings so a rename is compiler-checked at every call site.
- */
+/** Names for the `data-*` attributes that [Effects] reads to enhance elements. */
 object Attrs {
     /** Value = section id to smooth-scroll to on click (nav links, CTAs). */
     const val SCROLL_TARGET = "data-scroll-target"

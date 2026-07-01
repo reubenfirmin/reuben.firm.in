@@ -1,9 +1,6 @@
 package rf.view
 
-/**
- * Centralized CSS class names. Selector rules in [Styles] and class attributes in the builders both
- * reference these constants, so they can never drift apart and there are no raw class strings.
- */
+/** CSS class names, shared by the [Styles] rules and the view builders. */
 object CssClasses {
     // Layout / chrome
     const val SECTION = "section"

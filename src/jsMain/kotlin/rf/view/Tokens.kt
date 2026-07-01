@@ -2,10 +2,7 @@ package rf.view
 
 import kotlinx.css.Color
 
-/**
- * The single source of truth for the design system's colours and font stacks. No colour hex or font
- * name appears anywhere else — call sites read these tokens so a palette/typography change is one edit.
- */
+/** The design system's colours and font stacks. */
 object Tokens {
 
     // Surfaces (near-black, slightly layered).

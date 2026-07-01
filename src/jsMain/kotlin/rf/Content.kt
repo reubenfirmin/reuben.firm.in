@@ -1,10 +1,6 @@
 package rf
 
-/**
- * All site copy in one place. Sourced from Reuben's résumé + LinkedIn export (career facts, dates,
- * metrics) and the résumé endorsements (testimonials, verbatim-trimmed with correct attributions).
- * No invented facts.
- */
+/** All site copy in one place. */
 object Content {
 
     const val FIRST_NAME = "Reuben"
@@ -51,7 +47,7 @@ object Content {
 
     const val HEADSHOT = "/img/headshot.png"
 
-    /** LinkedIn recommendations (verbatim-trimmed, correct attributions). */
+    /** LinkedIn recommendations. */
     data class Testimonial(val quote: String, val name: String, val title: String, val org: String? = null)
     val testimonials = listOf(
         Testimonial(
@@ -104,14 +100,14 @@ object Content {
         ),
     )
 
-    /** Featured work. [meta] flags the framework this very site runs on. */
+    /** Featured work. [meta], when set, adds a "↳ …" callout on the card. */
     data class Project(
         val name: String,
         val tagline: String,
         val blurb: String,
         val tags: List<String>,
         val url: String,
-        val meta: Boolean = false,
+        val meta: String? = null,
     )
     val projects = listOf(
         Project(
@@ -126,8 +122,8 @@ object Content {
         ),
         Project(
             "zoned", "Typesafe full-stack web apps in Kotlin",
-            "SQL to CSS to routes, all typed Kotlin. This site runs on it.",
-            listOf("Kotlin", "Framework", "HTMX"), "https://github.com/reubenfirmin/zoned", meta = true,
+            "SQL to CSS to routes — everything typed Kotlin, no raw strings.",
+            listOf("Kotlin", "Framework", "HTMX"), "https://github.com/reubenfirmin/zoned", meta = "this site runs on it",
         ),
         Project(
             "dq", "A faster, friendlier du",
@@ -138,6 +134,11 @@ object Content {
             "wildcams", "Local ML pipeline for wildlife cameras",
             "A CPU-feasible, locally-running ML pipeline that ingests wildlife-camera footage from SD cards and filters it down to real detections.",
             listOf("Python", "ML"), "https://github.com/reubenfirmin/wildcams",
+        ),
+        Project(
+            "reuben.firm.in", "The site you're on",
+            "A scroll-hijack rolodex deck with a draggable WebGL skills globe that morphs into a 2D tree. Typed Kotlin/JS on zoned, three.js, shipped on Cloudflare.",
+            listOf("Kotlin/JS", "three.js", "Cloudflare"), "https://reuben.firm.in", meta = "you're looking at it",
         ),
     )
 
@@ -160,8 +161,7 @@ object Content {
     /** Education, shown at the foot of the timeline (after the animated gap for the early-career years). */
     val degree = Role("1999", "University of Aberdeen", "BSc (Hons), Computer Science", "Summa cum laude.", "#94a3b8")
 
-    /** Capability map for the skills constellation. Curated from LinkedIn endorsements + GitHub;
-     *  each domain is a hub, its [skills] the leaf nodes. [color] matches the timeline spectrum. */
+    /** Skills constellation: each domain is a hub, its [skills] the leaf nodes. */
     data class SkillDomain(val name: String, val color: String, val skills: List<String>)
     val skillDomains = listOf(
         SkillDomain("Leadership", "#4f7cff", listOf("Fractional CTO / CISO", "Team building", "M&A diligence", "Agile / Scrum")),

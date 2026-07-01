@@ -55,7 +55,7 @@ object SkillsGl {
         renderer.domElement.className = CssClasses.SKILLS_CANVAS
         stage.appendChild(renderer.domElement)
 
-        // The overlay class fills the stage AND is click-through (three.js does NOT set pointer-events).
+        // Overlay must be click-through so drags reach the canvas.
         val labelRenderer = CSS2DRenderer()
         labelRenderer.setSize(w, h)
         labelRenderer.domElement.className = CssClasses.SKILLS_LABELS

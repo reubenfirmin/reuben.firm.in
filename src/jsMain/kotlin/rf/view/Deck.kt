@@ -48,7 +48,7 @@ object Deck {
             val el = targets.item(i) as? HTMLElement ?: continue
             el.addEventListener("click", { _: Event -> el.getAttribute(Attrs.SCROLL_TARGET)?.let(::goToId) })
         }
-        // Per-card "next" chevrons advance the deck for people who don't scroll.
+        // Per-card "next" chevrons advance the deck.
         val nextButtons = document.querySelectorAll(".${CssClasses.DECK_NEXT}")
         for (i in 0 until nextButtons.length) {
             val el = nextButtons.item(i) as? HTMLElement ?: continue
