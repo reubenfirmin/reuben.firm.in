@@ -1,0 +1,31 @@
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+### IntelliJ IDEA ###
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+### Mac OS ###
+.DS_Store
+/.kotlin/
+/kotlin-js-store/
+
+# Legacy parcel/npm setup (kept out of the zoned build)
+node_modules
+.cache
+/dist/
+
+# Dev-server / transient logs
+*.log
+
+# Zoned generated files
+watch.sh
+test.sh
+
+# Wrangler / Cloudflare local state
+.wrangler/
+.dev.vars

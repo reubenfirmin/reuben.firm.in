@@ -1,0 +1,23 @@
+{
+  // Cloudflare Worker serving this landing site as static assets, mirroring thedozone2's setup.
+  //   npx wrangler deploy --env production   -> your custom domain (worker landing-production)
+  // Build the bundle FIRST — `wrangler deploy` only UPLOADS `assets.directory`, it builds nothing:
+  //   ./gradlew build-production   (assembles build/dist/js/productionExecutable)
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "landing",
+  "compatibility_date": "2026-06-07",
+  "assets": {
+    // The full site assembled by `./gradlew jsBrowserDistribution`.
+    "directory": "build/dist/js/productionExecutable",
+    // SPA: serve index.html for unmatched routes instead of 404.
+    "not_found_handling": "single-page-application"
+  },
+  // TODO: set your real domain here (an active Cloudflare zone), then deploy with --env production.
+  "env": {
+    "production": {
+      "routes": [
+        { "pattern": "example.com", "custom_domain": true }
+      ]
+    }
+  }
+}

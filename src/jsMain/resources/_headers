@@ -1,0 +1,10 @@
+# Security headers for the Cloudflare Worker static-assets deploy (served from
+# build/dist/js/productionExecutable; this file is copied there by jsBrowserDistribution).
+#
+# style-src 'unsafe-inline' is required: the CSS DSL injects <style> at runtime. No inline scripts
+# (the bundle is a same-origin /main.bundle.js), so script-src stays 'self'.
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: DENY
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
