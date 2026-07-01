@@ -12,11 +12,11 @@
     // SPA: serve index.html for unmatched routes instead of 404.
     "not_found_handling": "single-page-application"
   },
-  // TODO: set your real domain here (an active Cloudflare zone), then deploy with --env production.
+  // Deploy to the custom domain with --env production (firm.in must be an active Cloudflare zone).
   "env": {
     "production": {
       "routes": [
-        { "pattern": "example.com", "custom_domain": true }
+        { "pattern": "reuben.firm.in", "custom_domain": true }
       ]
     }
   }

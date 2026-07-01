@@ -1,25 +1,43 @@
 package rf.view
 
 /**
- * Centralized element ids and the section registry — no raw id strings scattered across the view.
- * The [sections] list is the single source of truth for both the scrollable `<section>`s and the
- * side-nav items that scroll-spy against them (see [SideNav] and [SectionNavigator]).
+ * Centralized element ids, the section registry, and the typed data-attribute names used to wire
+ * client behaviour. Nothing in the view builds an id, section id, or attribute name from a raw string.
  */
 object DomIds {
 
-    /** A page section and its side-nav label. [id] is the section element's DOM id and scroll target. */
-    data class Section(val id: String, val navLabel: String)
+    /** A page section. [navLabel] non-null means it also appears as a header nav link. */
+    data class Section(val id: String, val navLabel: String?)
 
-    val INTRO = Section("intro", "Home")
-    val EXPERIENCE = Section("experience", "Experience")
+    val HERO = Section("hero", null)
+    val PROOF = Section("proof", "References")
     val PROJECTS = Section("projects", "Projects")
+    val EXPERIENCE = Section("experience", "Experience")
+    val SKILLS = Section("skills", "Skills")
     val CONTACT = Section("contact", "Contact")
 
-    /** Order matters: drives section order on the page and numbering (01..04) in the side-nav. */
-    val sections = listOf(INTRO, EXPERIENCE, PROJECTS, CONTACT)
+    /** Order = order on the page and in scroll-spy. */
+    val sections = listOf(HERO, PROOF, PROJECTS, EXPERIENCE, SKILLS, CONTACT)
 
-    /** The side-nav item id for a given section (e.g. "nav-intro"). */
-    fun navItemId(section: Section) = "nav-${section.id}"
+    /** The sections that surface as header nav links. */
+    val navSections = sections.filter { it.navLabel != null }
 
-    const val SIDE_NAV = "side-nav"
+    fun navLinkId(section: Section) = "nav-${section.id}"
+
+    const val APP_ROOT = "app-root"
+}
+
+/**
+ * Typed names for the `data-*` attributes that mark elements for [Effects] / [SectionNavigator] to
+ * enhance. Kept out of raw strings so a rename is compiler-checked at every call site.
+ */
+object Attrs {
+    /** Value = section id to smooth-scroll to on click (nav links, CTAs). */
+    const val SCROLL_TARGET = "data-scroll-target"
+    /** Presence = element's text should decrypt/scramble into place on load. */
+    const val DECRYPT = "data-decrypt"
+    /** Value = integer to count up to on reveal (metric numbers). */
+    const val COUNT_TO = "data-count-to"
+    /** Value = hex accent color for the element (testimonial spotlight chips). */
+    const val ACCENT_HEX = "data-accent"
 }

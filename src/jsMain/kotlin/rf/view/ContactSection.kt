@@ -1,51 +1,47 @@
 package rf.view
 
 import kotlinx.css.*
+import kotlinx.css.properties.*
 import kotlinx.html.*
 import rf.Content
+import zoned.framework.interop.backgroundClipText
 import zoned.framework.interop.css
-import zoned.framework.interop.raw
+import zoned.framework.interop.linearGradient
+import zoned.framework.interop.webkitTextFillColor
 
-/** Section 04: contact card over a background image (email + social/resume links). */
+/** Contact: a live availability pulse, a gradient heading, and a row of monospace link buttons. */
 fun FlowContent.contactSection() {
-    section(classes = CssClasses.SECTION) {
-        id = DomIds.CONTACT.id
-        css {
-            raw("background", "url(/img/contact-bg.png) center/cover no-repeat")
-            alignItems = Align.center
-        }
-        div {
+    pageSection(DomIds.CONTACT) {
+        monoLabel("contact")
+        h2 {
+            +"Let's build something."
             css {
-                padding = Padding(45.px)
-                textAlign = TextAlign.center
-                backgroundColor = Palette.BLACK
-                raw("box-shadow", "0 0 30px 0 rgba(0,0,0,.75)")
-                minWidth = 240.px
+                fontSize = clamp(30.px, 5.vw, 52.px)
+                fontWeight = FontWeight("800")
+                letterSpacing = (-0.02).em
+                marginBottom = 14.px
+                backgroundImage = linearGradient(direction = 120.deg) { stop(Tokens.TEXT); stop(Tokens.ACCENT_SOFT) }
+                backgroundClipText()
+                webkitTextFillColor(Color.transparent)
             }
-            a {
-                href = "mailto:${Content.EMAIL}"
-                +"Email Me"
-                css {
-                    display = Display.block
-                    marginBottom = 24.px
-                    color = Palette.WHITE
-                    fontWeight = FontWeight("700")
-                }
-            }
+        }
+        p {
+            +"Fractional CTO / CISO, currently taking on select engagements."
+            css { color = Tokens.MUTED; marginBottom = 32.px }
+        }
+        div(classes = CssClasses.CONTACT_GRID) {
             Content.contactLinks.forEach { link ->
+                val external = link.href.startsWith("http")
+                val caption = link.href
+                    .removePrefix("mailto:").removePrefix("https://").removePrefix("http://")
+                    .removePrefix("www.").removeSuffix("/")
                 a(classes = CssClasses.CONTACT_LINK) {
                     href = link.href
-                    if (link.href.startsWith("http")) target = "_blank"
-                    +link.label
-                    css {
-                        display = Display.block
-                        width = 160.px
-                        raw("margin", "0 auto 16px auto")
-                        padding = Padding(8.px, 0.px)
-                        color = Palette.WHITE
-                        fontWeight = FontWeight("700")
-                        backgroundColor = Palette.HIGHLIGHT
-                    }
+                    if (external) target = "_blank"
+                    contactIcon(link.icon)
+                    div(classes = CssClasses.CONTACT_LINK_LABEL) { +link.label }
+                    div(classes = CssClasses.CONTACT_LINK_SUB) { +caption }
+                    span(classes = CssClasses.CONTACT_LINK_ARROW) { +(if (external) "↗" else "→") }
                 }
             }
         }

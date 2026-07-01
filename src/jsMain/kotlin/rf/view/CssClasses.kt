@@ -1,19 +1,118 @@
 package rf.view
 
 /**
- * Centralized CSS class names, so selector-based rules in [Styles] and the class attributes in the
- * builders never drift apart via raw strings.
+ * Centralized CSS class names. Selector rules in [Styles] and class attributes in the builders both
+ * reference these constants, so they can never drift apart and there are no raw class strings.
  */
 object CssClasses {
+    // Layout / chrome
     const val SECTION = "section"
-    const val SIDE_NAV_ITEM = "side-nav-item"
-    const val SIDE_NAV_NUM = "side-nav-num"
-    const val SIDE_NAV_LABEL = "side-nav-label"
+    const val FLIP = "flip"
+    const val FLIPPED = "flipped"
+    const val WRAP = "wrap"
+    const val DECK = "deck"
+    const val DECK_METER = "deck-meter"
+    const val DECK_METER_TRACK = "deck-meter-track"
+    const val DECK_METER_FILL = "deck-meter-fill"
+    const val DECK_DOTS = "deck-dots"
+    const val DECK_DOT = "deck-dot"
+    const val DECK_NEXT = "deck-next"
+    const val SECTION_LEAD = "section-lead"
+    const val HEADER = "site-header"
+    const val BRAND = "brand"
+    const val NAV = "nav"
+    const val NAV_LINK = "nav-link"
     const val IS_ACTIVE = "is-active"
+    const val MONO_LABEL = "mono-label"
+
+    // Buttons
     const val CTA = "cta"
-    const val HIGHLIGHT_CARD = "highlight-card"
-    const val ROLE_CARD = "role-card"
-    const val PROJECT_CARD = "project-card"
+    const val CTA_GHOST = "cta-ghost"
+
+    // Hero
+    const val HERO = "hero"
+    const val HERO_GRID = "hero-grid"
+    const val HERO_LEFT = "hero-left"
+    const val HERO_MEDIA = "hero-media"
+    const val HEADSHOT_FRAME = "headshot-frame"
+    const val HEADSHOT_IMG = "headshot-img"
+    const val HERO_HEAD = "hero-head"
+    const val TERMINAL = "terminal"
+    const val CURSOR = "cursor"
+    const val CHIP_ROW = "chip-row"
+    const val CHIP = "chip"
+    const val HERO_QUOTE = "hero-quote"
+    const val HERO_QUOTE_ROLE = "hero-quote-role"
+
+    // Proof (testimonial spotlight + metrics)
+    const val SPOTLIGHT = "spotlight"
+    const val TESTIMONIAL_CARD = "testimonial-card"
+    const val TESTIMONIAL_MARK = "testimonial-mark"
+    const val TESTIMONIAL_QUOTE = "testimonial-quote"
+    const val TESTIMONIAL_WORD = "testimonial-word"
+    const val TESTIMONIAL_AUTHOR = "testimonial-author"
+    const val TESTIMONIAL_BADGE = "testimonial-badge"
+    const val TESTIMONIAL_NAME = "testimonial-name"
+    const val TESTIMONIAL_META = "testimonial-meta"
+    const val SPOTLIGHT_RAIL = "spotlight-rail"
+    const val SPOTLIGHT_CHIP = "spotlight-chip"
+    const val SPOTLIGHT_PROGRESS = "spotlight-progress"
+    const val SPOTLIGHT_PROGRESS_FILL = "spotlight-progress-fill"
+    const val METRIC_BAND = "metric-band"
+    const val METRIC = "metric"
+    const val METRIC_VALUE = "metric-value"
+    const val METRIC_LABEL = "metric-label"
+
+    // Projects (expanding-panel accordion)
+    const val PROJECTS = "projects"
+    const val PROJECT_PANEL = "project-panel"
+    const val PROJECT_INDEX = "project-index"
+    const val PROJECT_NAME = "project-name"
+    const val PROJECT_DETAIL = "project-detail"
+    const val PROJECT_TAGLINE = "project-tagline"
+    const val PROJECT_BLURB = "project-blurb"
+    const val TAG_ROW = "tag-row"
+    const val TAG = "tag"
+    const val CARD_META = "card-meta"
+
+    // Experience
+    const val IS_VISIBLE = "is-visible"
+    const val TIMELINE = "timeline"
+    const val HAZE = "haze"
+    const val HAZE_MOTE = "haze-mote"
+    const val TL_NODE = "tl-node"
+    const val TL_MONO = "tl-mono"
+    const val TL_ROW = "tl-row"
+    const val TL_MAIN = "tl-main"
+    const val TL_HEAD = "tl-head"
+    const val TL_DETAIL = "tl-detail"
+    const val TL_WHEN = "tl-when"
+    const val TL_WHAT = "tl-what"
+    const val TL_ROLE = "tl-role"
+    const val TL_BODY = "tl-body"
+
+    // Skills constellation (three.js)
+    const val SKILLS_STAGE = "skills-stage"
+    const val SKILLS_CANVAS = "skills-canvas"
+    const val SKILLS_LABELS = "skills-labels"
+    const val SKILLS_TOGGLE = "skills-toggle"
+    const val SKILLS_SEARCH = "skills-search"
+    const val SKILLS_SEARCH_PROMPT = "skills-search-prompt"
+    const val SKILLS_SEARCH_INPUT = "skills-search-input"
+    const val SK_HUB_LABEL = "sk-hub-label"
+    const val SK_LEAF_LABEL = "sk-leaf-label"
+    const val SK_CORE_LABEL = "sk-core-label"
+
+    // Contact
+    const val CONTACT_GRID = "contact-grid"
     const val CONTACT_LINK = "contact-link"
-    const val ARROW_LINK = "arrow-link"
+    const val CONTACT_ICON = "contact-icon"
+    const val CONTACT_LINK_LABEL = "contact-link-label"
+    const val CONTACT_LINK_SUB = "contact-link-sub"
+    const val CONTACT_LINK_ARROW = "contact-link-arrow"
+
+    // Effect markers (queried by the JS enhancers)
+    const val REVEAL = "reveal"
+    const val REVEALED = "revealed"
+    const val MAGNETIC = "magnetic"
 }

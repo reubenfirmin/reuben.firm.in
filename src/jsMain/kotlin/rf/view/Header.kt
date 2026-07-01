@@ -1,55 +1,27 @@
 package rf.view
 
-import kotlinx.css.*
 import kotlinx.html.*
 import rf.Content
-import zoned.framework.interop.css
-import zoned.framework.interop.raw
 
-/** Fixed top header: logo + name on the left, a Contact button (scrolls to the contact section)
- *  on the right. The button carries [SectionNavigator.SCROLL_TARGET] so the navigator wires it. */
+/** Fixed top header: monospace brand (scrolls to top) on the left, nav links + a CTA on the right.
+ *  Interactive elements carry [Attrs.SCROLL_TARGET]; [SectionNavigator] wires clicks and scroll-spy. */
 fun FlowContent.header() {
-    header {
-        css {
-            position = Position.fixed
-            top = 0.px; left = 0.px; right = 0.px
-            height = 70.px
-            display = Display.flex
-            alignItems = Align.center
-            justifyContent = JustifyContent.spaceBetween
-            padding = Padding(0.px, 32.px)
-            zIndex = 20
+    header(classes = CssClasses.HEADER) {
+        a(classes = CssClasses.BRAND) {
+            attributes[Attrs.SCROLL_TARGET] = DomIds.HERO.id
+            +"${Content.FIRST_NAME.lowercase()} ${Content.LAST_NAME.lowercase()}"
         }
-        a {
-            href = "#"
-            css {
-                display = Display.flex
-                alignItems = Align.center
-                color = Palette.WHITE
-            }
-            img {
-                src = "/img/logo.png"; alt = Content.FIRST_NAME
-                css { width = 30.px; raw("height", "auto") }
-            }
-            span {
-                +"${Content.FIRST_NAME} ${Content.LAST_NAME}"
-                css {
-                    marginLeft = 10.px
-                    fontSize = 16.px
-                    fontWeight = FontWeight("700")
-                    textTransform = TextTransform.uppercase
+        nav(classes = CssClasses.NAV) {
+            DomIds.navSections.forEach { sec ->
+                a(classes = CssClasses.NAV_LINK) {
+                    id = DomIds.navLinkId(sec)
+                    attributes[Attrs.SCROLL_TARGET] = sec.id
+                    +sec.navLabel.orEmpty()
                 }
             }
-        }
-        button(classes = CssClasses.CTA) {
-            +"Contact"
-            attributes[SectionNavigator.SCROLL_TARGET] = DomIds.CONTACT.id
-            css {
-                padding = Padding(8.px, 20.px)
-                color = Palette.WHITE
-                fontWeight = FontWeight("700")
-                textTransform = TextTransform.uppercase
-                backgroundColor = Palette.HIGHLIGHT
+            a(classes = CssClasses.CTA) {
+                attributes[Attrs.SCROLL_TARGET] = DomIds.CONTACT.id
+                +"Get in touch"
             }
         }
     }

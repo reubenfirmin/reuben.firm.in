@@ -1,72 +1,186 @@
 package rf
 
 /**
- * All site copy in one place, so the content can be revised without touching layout/markup.
- * (Ported verbatim from the original jQuery site; refresh the wording here as needed.)
+ * All site copy in one place. Sourced from Reuben's résumé + LinkedIn export (career facts, dates,
+ * metrics) and the résumé endorsements (testimonials, verbatim-trimmed with correct attributions).
+ * No invented facts.
  */
 object Content {
 
     const val FIRST_NAME = "Reuben"
     const val LAST_NAME = "Firmin"
-    const val TAGLINE = "Experienced technology leader, entrepreneur, and 10x coder."
 
-    const val EMAIL = "fromsite@flavor8.com"
+    // Hero
+    const val HEADLINE_1 = "Technology leadership,"
+    const val HEADLINE_2 = "hands on the keys."
+    const val TERMINAL_ROLE = "fractional cto / ciso"
+
+    /** The hero terminal line decrypts through each of these in turn, then loops. */
+    val terminalRoles = listOf(
+        "fractional cto / ciso",
+        "innovator",
+        "entrepreneur",
+        "project manager",
+        "security & compliance",
+        "product manager",
+        "builder",
+        "maker",
+    )
+    const val HERO_QUOTE = "“We never would have exited the business without Reuben's technology leadership.”"
+    const val HERO_QUOTE_ROLE = "Steve Richard, Co-Founder, ExecVision"
+
+    // Links / contact
+    const val EMAIL = "rf@4rc.io"
     const val RESUME_URL = "/reubenfirmin.pdf"
-    const val GITHUB_URL = "https://github.com/reubenfirmin/"
+    const val GITHUB_URL = "https://github.com/reubenfirmin"
     const val LINKEDIN_URL = "https://www.linkedin.com/in/reubenfirmin/"
-    const val BOOK_MEETING_URL = "http://reubencal.com"
+    const val BOOK_URL = "http://reubencal.com"
+    const val BUSINESS_URL = "https://4rc.io"
+
+    /** Hero metric chips + the proof-band figures. [value] counts up on reveal; [suffix] is static. */
+    data class Metric(val value: Int, val suffix: String, val label: String)
+    val metrics = listOf(
+        Metric(25, "+", "years in software engineering"),
+        Metric(4, "", "C-level titles: CEO, CTO, CISO, chief architect"),
+        Metric(2, "", "patents (hardware + data)"),
+        Metric(1, "", "acquisition, led as CTO through exit"),
+    )
+
+    /** Short status chips shown in the hero. */
+    val heroChips = listOf("CTO", "CISO", "25+ yrs", "SOC 2 / ISO 27001", "US citizen", "1099")
 
     const val HEADSHOT = "/img/headshot.png"
 
-    /** The three "what I do" cards under the intro banner. */
-    data class Highlight(val title: String, val body: String)
-    val highlights = listOf(
-        Highlight(
-            "Technology Leader",
-            "Startup CTO (successful acquisition). VPE, Director Engineering. Hands on / architect."
+    /** LinkedIn recommendations (verbatim-trimmed, correct attributions). */
+    data class Testimonial(val quote: String, val name: String, val title: String, val org: String? = null)
+    val testimonials = listOf(
+        Testimonial(
+            "Reuben is an expert engineering leader who oversaw the creation of the ExecVision product, now part of Mediafly. Reuben is an innovator. I look forward to seeing what he does next.",
+            "Carson Conant", "Founder & CEO", "Mediafly",
         ),
-        Highlight(
-            "10x Coder",
-            "Kotlin, Java, TypeScript, SQL, Python, Rust, Golang."
+        Testimonial(
+            "We went from deploying once every two weeks to shipping multiple times a week. As a non-technical founder, having someone like Reuben is a lifesaver. He's your guy.",
+            "Chaim Schwartz", "CEO", "Finance Lobby",
         ),
-        Highlight(
-            "Data & AI",
-            "Databases, Postgres, Sqlite, Redshift, ElasticSearch, ML, NLP, GPT, LLM."
+        Testimonial(
+            "Reuben has filled various roles as our needs evolved, including overseeing the SOC 2 process as our fractional CISO. His versatility and dedication have been invaluable.",
+            "Bomee Jung", "Founder", "Cadence OneFive",
+        ),
+        Testimonial(
+            "Reuben strategically managed our SOC 2 certification, streamlining the mundane tasks and minimizing team disruption. We maintained laser focus on product delivery without compromising our compliance requirements.",
+            "Francois Huet", "Head of Engineering", "Cadence OneFive",
+        ),
+        Testimonial(
+            "He became my technical cofounder. An architect and a hands-on CTO who can outperform most salespeople on a call. I can't wait to start another company with Reuben.",
+            "David Stillman", "CEO", "ExecVision",
+        ),
+        Testimonial(
+            "Reuben quickly understood complicated specifications, created an implementation plan, and single-handedly put together a talented team of developers.",
+            "Daniel Schley", "Founder", "York Run",
+        ),
+        Testimonial(
+            "Reuben helped us avoid the costly pitfalls of new companies. We achieved product-market fit with paying customers in less than a year.",
+            "El Young", "Co-Founder", "Stream Bean AI",
+        ),
+        Testimonial(
+            "I could not believe how hands-on Reuben could get. He's that person to rely on every step of the way. My first Tech Jefe, and it was life-changing.",
+            "Jeffry Luna", "QA Engineer", "ExecVision",
+        ),
+        Testimonial(
+            "We co-filed a patent and led development of a powerful health-research data platform. A rare combination of strong technical chops, solid project management, and good instincts sourcing talent.",
+            "Mitch Praver", "CEO", "Devexi (client)",
+        ),
+        Testimonial(
+            "He gave us a comprehensive set of security recommendations tailored to our needs, helped us implement best practices, and ran an engaging security-awareness session. We now feel more secure and better prepared thanks to his guidance.",
+            "Lucas Gray", "Head of Engineering", "Alloy Health",
+        ),
+        Testimonial(
+            "He is effective, thorough and quick. He thinks issues through and brings you solutions, not problems. I enthusiastically recommend his work.",
+            "Tom Des Jardins", "Director of Digital Products",
+        ),
+        Testimonial(
+            "Great depth and breadth in software engineering, and an incredibly fast study on the business requirements. I would definitely work with him again.",
+            "Peter Connolly", "direct report",
         ),
     )
 
-    /** Recent-career roles. */
-    data class Role(val company: String, val image: String, val body: String)
-    val roles = listOf(
-        Role(
-            "4rc.io", "/img/work-alex-nowak.jpg",
-            "Founder, 2013-2015. Virtual CTO consulting. Architecture, product design, recruiting, hands on coding."
-        ),
-        Role(
-            "ExecVision", "/img/work-execvision.png",
-            "CTO, 2015-2022. Joined after founding, grew through acquisition. Led technology and product."
-        ),
-        Role(
-            "Mediafly", "/img/work-mediafly.png",
-            "VPE, 2022-2023. Led integration of acquired products. De facto principal engineer."
-        ),
+    /** Featured work. [meta] flags the framework this very site runs on. */
+    data class Project(
+        val name: String,
+        val tagline: String,
+        val blurb: String,
+        val tags: List<String>,
+        val url: String,
+        val meta: Boolean = false,
     )
-
-    /** Open source projects. */
-    data class Project(val name: String, val url: String)
     val projects = listOf(
-        Project("The Do Zone", "http://the.do.zone"),
-        Project("sz - a better du", "https://github.com/reubenfirmin/sz"),
-        Project("GPT email reply bot", "https://github.com/reubenfirmin/EmailReplyBot"),
-        Project("Diycam", "https://github.com/reubenfirmin/diycam"),
+        Project(
+            "The Do Zone", "Private, offline-first task manager",
+            "A keyboard-driven \"3D kanban\" PWA: local-first, sync-enabled, and open source. Built on zoned.",
+            listOf("Kotlin/JS", "PWA", "Local-first"), "https://the.do.zone",
+        ),
+        Project(
+            "bui", "Sandbox untrusted code, without the bwrap flags",
+            "A TUI to configure and launch bubblewrap sandboxes with network filtering. See the command before it runs. Handy for constraining agents like Claude Code.",
+            listOf("Python", "TUI", "Sandboxing"), "https://github.com/reubenfirmin/bubblewrap-tui",
+        ),
+        Project(
+            "zoned", "Typesafe full-stack web apps in Kotlin",
+            "SQL to CSS to routes, all typed Kotlin. This site runs on it.",
+            listOf("Kotlin", "Framework", "HTMX"), "https://github.com/reubenfirmin/zoned", meta = true,
+        ),
+        Project(
+            "dq", "A faster, friendlier du",
+            "Answers \"what's eating my disk?\" fast: skips virtual and cross-device mounts, human-readable and sorted by default. A lean single-binary tool in Rust.",
+            listOf("Rust"), "https://github.com/reubenfirmin/dq",
+        ),
+        Project(
+            "wildcams", "Local ML pipeline for wildlife cameras",
+            "A CPU-feasible, locally-running ML pipeline that ingests wildlife-camera footage from SD cards and filters it down to real detections.",
+            listOf("Python", "ML"), "https://github.com/reubenfirmin/wildcams",
+        ),
     )
 
-    /** Contact links (label to href). */
-    data class Link(val label: String, val href: String)
+    /** Experience timeline, newest first. Dates/titles from the LinkedIn export. [color] visually
+     *  ties an org across entries (both 4rc.io stints share a colour). */
+    data class Role(val period: String, val org: String, val title: String, val body: String, val color: String)
+    val roles = listOf(
+        Role("2023 - now", "4rc.io", "Fractional CTO / CISO",
+            "Fractional technology leadership for early-stage startups: architecture, product, security (SOC 2 / ISO 27001), and AI engineering.", "#4f7cff"),
+        Role("2022 - 2023", "Mediafly", "VP Engineering",
+            "Joined via the ExecVision acquisition. Integrated the platform into Mediafly and ran technical diligence for a strategic acquisition.", "#2dd4bf"),
+        Role("2015 - 2022", "ExecVision", "CTO",
+            "Built the org and product from prototype to a successful acquisition. Scaled a fully-remote team to 25 engineers; owned SOC 2, architecture, and hands-on code.", "#10b981"),
+        Role("2013 - 2015", "4rc.io", "Founder / Virtual CTO",
+            "Consulting CTO for early-stage startups: product, architecture, team sourcing, hands-on coding. Three successful engagements, culminating in ExecVision.", "#4f7cff"),
+        Role("2010 - 2013", "Catalist", "Chief Architect",
+            "Set technical direction for big-data microtargeting products; managed teams and coded hands-on.", "#8b5cf6"),
+    )
+
+    /** Education, shown at the foot of the timeline (after the animated gap for the early-career years). */
+    val degree = Role("1999", "University of Aberdeen", "BSc (Hons), Computer Science", "Summa cum laude.", "#94a3b8")
+
+    /** Capability map for the skills constellation. Curated from LinkedIn endorsements + GitHub;
+     *  each domain is a hub, its [skills] the leaf nodes. [color] matches the timeline spectrum. */
+    data class SkillDomain(val name: String, val color: String, val skills: List<String>)
+    val skillDomains = listOf(
+        SkillDomain("Leadership", "#4f7cff", listOf("Fractional CTO / CISO", "Team building", "M&A diligence", "Agile / Scrum")),
+        SkillDomain("Architecture", "#2dd4bf", listOf("System design", "Scalability", "REST APIs", "Design patterns")),
+        SkillDomain("Security", "#10b981", listOf("SOC 2", "ISO 27001", "Compliance programs")),
+        SkillDomain("Languages", "#8b5cf6", listOf("Kotlin", "Python", "Scala", "Go", "Rust", "TypeScript")),
+        SkillDomain("Data", "#f59e0b", listOf("PostgreSQL", "Elasticsearch", "Data architecture", "SQL")),
+        SkillDomain("AI", "#38bdf8", listOf("AI engineering", "LLM integration", "ML pipelines", "Team adoption")),
+        SkillDomain("DevOps", "#f472b6", listOf("Cloudflare", "Fly.io", "Render", "Docker", "Podman", "Shell scripting", "AWS", "Linux")),
+    )
+
+    /** Contact links (label to href), each with a typed icon for the card. */
+    enum class ContactIcon { MAIL, LINKEDIN, GITHUB, CALENDAR, GLOBE }
+    data class Link(val label: String, val href: String, val icon: ContactIcon)
     val contactLinks = listOf(
-        Link("LinkedIn", LINKEDIN_URL),
-        Link("GitHub", GITHUB_URL),
-        Link("Book Meeting", BOOK_MEETING_URL),
-        Link("Download Resume", RESUME_URL),
+        Link("Email", "mailto:$EMAIL", ContactIcon.MAIL),
+        Link("LinkedIn", LINKEDIN_URL, ContactIcon.LINKEDIN),
+        Link("GitHub", GITHUB_URL, ContactIcon.GITHUB),
+        Link("Book a call", BOOK_URL, ContactIcon.CALENDAR),
+        Link("4rc.io", BUSINESS_URL, ContactIcon.GLOBE),
     )
 }

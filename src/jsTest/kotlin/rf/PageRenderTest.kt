@@ -16,12 +16,12 @@ class PageRenderTest {
     }
 
     private fun cleanup() {
-        // The whole page hangs off one app-root div; removing it (via any section's parent) resets.
-        document.getElementById(DomIds.INTRO.id)?.parentElement?.remove()
+        // The whole page hangs off the app-root div; removing it resets the DOM.
+        document.getElementById(DomIds.APP_ROOT)?.remove()
     }
 
     @Test
-    fun rendersAllFourSections() {
+    fun rendersAllSections() {
         renderPage()
         try {
             DomIds.sections.forEach { section ->
@@ -33,28 +33,35 @@ class PageRenderTest {
     }
 
     @Test
-    fun sideNavHasOneItemPerSection() {
+    fun headerHasOneNavLinkPerNavSection() {
         renderPage()
         try {
-            val items = document.querySelectorAll(".${CssClasses.SIDE_NAV_ITEM}")
-            assertEquals(DomIds.sections.size, items.length, "one side-nav item per section")
+            val items = document.querySelectorAll(".${CssClasses.NAV_LINK}")
+            assertEquals(DomIds.navSections.size, items.length, "one nav link per nav section")
         } finally {
             cleanup()
         }
     }
 
     @Test
-    fun resumeAndProjectLinksArePresent() {
+    fun featuredProjectLinkIsPresent() {
         renderPage()
         try {
             assertNotNull(
-                document.querySelector("a[href='${Content.RESUME_URL}']"),
-                "download-resume link points at the PDF",
-            )
-            assertNotNull(
-                document.querySelector("a[href='http://the.do.zone']"),
+                document.querySelector("a[href='https://the.do.zone']"),
                 "The Do Zone project link is present",
             )
+        } finally {
+            cleanup()
+        }
+    }
+
+    @Test
+    fun metricsHaveCountUpTargets() {
+        renderPage()
+        try {
+            val nums = document.querySelectorAll("[${rf.view.Attrs.COUNT_TO}]")
+            assertEquals(Content.metrics.size, nums.length, "one count-up target per metric")
         } finally {
             cleanup()
         }
