@@ -14,9 +14,6 @@ private val PROJECT_HEX = listOf("#5b74ff", "#a855f7", "#2b47ff", "#38bdf8", "#2
 fun FlowContent.projects() {
     pageSection(DomIds.PROJECTS) {
         monoLabel("selected projects")
-        p(classes = CssClasses.SECTION_LEAD) {
-            +"A local-first PWA, a sandboxing TUI, a full-stack web framework, a disk-usage CLI, an ML pipeline, and this very site — spanning Kotlin, Python, and Rust."
-        }
         div(classes = CssClasses.PROJECTS) {
             Content.projects.forEachIndexed { i, project ->
                 val hex = PROJECT_HEX[i % PROJECT_HEX.size]

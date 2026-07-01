@@ -13,6 +13,8 @@ fun FlowContent.experienceSection() {
     pageSection(DomIds.EXPERIENCE, reveal = false) {
         monoLabel("experience")
         div(classes = CssClasses.TIMELINE) {
+            // A spark of light that runs continuously down the spine.
+            div(classes = CssClasses.TL_SPARK) {}
             Content.roles.forEachIndexed { i, r -> timelineRow(r, active = i == 0) }
             hazeRow()
             timelineRow(Content.degree, active = false)
@@ -25,8 +27,11 @@ private fun FlowContent.timelineRow(r: Content.Role, active: Boolean) {
     val cls = "${CssClasses.TL_ROW} ${CssClasses.REVEAL}" + if (active) " ${CssClasses.IS_ACTIVE}" else ""
     div(classes = cls) {
         div(classes = CssClasses.TL_NODE) {
-            css { borderColor = c; boxShadow += BoxShadow(c.withAlpha(0.4), 0.px, 0.px, 18.px, (-6).px) }
-            span(classes = CssClasses.TL_MONO) { css { color = c }; +monogram(r.org) }
+            css {
+                borderColor = c; backgroundColor = c
+                boxShadow += BoxShadow(c.withAlpha(0.5), 0.px, 0.px, 18.px, (-5).px)
+            }
+            span(classes = CssClasses.TL_MONO) { css { color = Tokens.BG }; +monogram(r.org) }
         }
         div(classes = CssClasses.TL_MAIN) {
             div(classes = CssClasses.TL_HEAD) {
@@ -45,8 +50,11 @@ private fun FlowContent.timelineRow(r: Content.Role, active: Boolean) {
 private fun FlowContent.hazeRow() {
     div(classes = "${CssClasses.TL_ROW} ${CssClasses.REVEAL}") {
         div(classes = CssClasses.TL_NODE) {
-            css { borderColor = Tokens.SLATE; boxShadow += BoxShadow(Tokens.SLATE.withAlpha(0.3), 0.px, 0.px, 18.px, (-6).px) }
-            span(classes = CssClasses.TL_MONO) { css { color = Tokens.SLATE }; +"~" }
+            css {
+                borderColor = Tokens.SLATE; backgroundColor = Tokens.SLATE
+                boxShadow += BoxShadow(Tokens.SLATE.withAlpha(0.45), 0.px, 0.px, 18.px, (-5).px)
+            }
+            span(classes = CssClasses.TL_MONO) { css { color = Tokens.BG }; +"~" }
         }
         div(classes = CssClasses.TL_MAIN) {
             div(classes = CssClasses.TL_HEAD) {

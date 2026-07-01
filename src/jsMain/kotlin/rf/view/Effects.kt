@@ -48,6 +48,9 @@ object Effects {
 
     private fun spotlight() {
         val root = document.querySelector(".${CssClasses.SPOTLIGHT}") as? HTMLElement ?: return
+        // The references panel: the cycle only advances once the deck has landed here, so Carson (index 0)
+        // is what the reader sees first rather than a mid-rotation card.
+        val panel = root.closest(".${CssClasses.SECTION}") as? HTMLElement
         val cardNodes = root.getElementsByClassName(CssClasses.TESTIMONIAL_CARD)
         val cards = (0 until cardNodes.length).mapNotNull { cardNodes.item(it) as? HTMLElement }
         if (cards.isEmpty()) return
@@ -99,8 +102,9 @@ object Effects {
             if (prev == 0.0) { prev = ts; lastAdvance = ts }
             val dt = ts - prev
             prev = ts
-            if (hovered) {
-                lastAdvance += dt // freeze the meter while the reader hovers
+            val landed = panel?.classList?.contains(CssClasses.IS_CURRENT) ?: true
+            if (hovered || !landed) {
+                lastAdvance += dt // freeze the meter while the reader hovers, or before the panel is landed on
             } else {
                 val elapsed = ts - lastAdvance
                 fill?.style?.width = "${(elapsed / SPOTLIGHT_MS * 100.0).coerceAtMost(100.0)}%"

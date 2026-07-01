@@ -12,15 +12,15 @@ object Tokens {
 
     // Text.
     val TEXT = Color("#e9e9ec")
-    val MUTED = Color("#8b8e96")
-    val FAINT = Color("#5b5e66")
+    val MUTED = Color("#9c9fa6")
+    val FAINT = Color("#74767d")
 
     // Accent: the brand's electric blue.
     val ACCENT = Color("#2b47ff")
     val ACCENT_SOFT = Color("#7d90ff")
 
-    // Timeline "pre-history" tier: the muted slate shared by Catalist, the haze years, and the degree.
-    val SLATE = Color("#94a3b8")
+    // Timeline "pre-history" tier: a warm taupe for the haze years + degree.
+    val SLATE = Color("#c99a6a")
 
     // Structure.
     val LINE = Color("#232428")

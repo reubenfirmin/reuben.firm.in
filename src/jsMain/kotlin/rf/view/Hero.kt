@@ -39,7 +39,7 @@ fun FlowContent.hero() {
                     p(classes = CssClasses.HERO_QUOTE) {
                         +Content.HERO_QUOTE
                         br {}
-                        span(classes = CssClasses.HERO_QUOTE_ROLE) { +"— ${Content.HERO_QUOTE_ROLE}" }
+                        span(classes = CssClasses.HERO_QUOTE_ROLE) { +Content.HERO_QUOTE_ROLE }
                     }
                 }
                 div(classes = CssClasses.HERO_MEDIA) {

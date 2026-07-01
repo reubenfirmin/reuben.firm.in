@@ -28,6 +28,22 @@ object Styles {
                 at(0.pct, 100.pct) { transform { translateX((-50).pct); translateY(0.px) } }
                 at(50.pct) { transform { translateX((-50).pct); translateY(5.px) } }
             }
+            // Experience-tab sizzle: a beacon ring on the active node, a spark of light running down the
+            // spine, and a slow breath on the warm glow.
+            val beacon = keyframes("rf-beacon") {
+                at(0.pct) { opacity = 0.6; transform { scale(0.85) } }
+                at(100.pct) { opacity = 0.0; transform { scale(2.4) } }
+            }
+            val breathe = keyframes("rf-breathe") {
+                at(0.pct, 100.pct) { opacity = 0.7 }
+                at(50.pct) { opacity = 1.0 }
+            }
+            val sparkKf = keyframes("rf-spark") {
+                at(0.pct) { opacity = 0.0; top = 3.pct }
+                at(14.pct) { opacity = 1.0 }
+                at(86.pct) { opacity = 1.0 }
+                at(100.pct) { opacity = 0.0; top = 97.pct }
+            }
             val infinite = IterationCount("infinite")
 
             // --- Sections & layout ---------------------------------------------------------------
@@ -112,7 +128,7 @@ object Styles {
             rule(".${CssClasses.NAV}") { display = Display.flex; gap = 28.px; alignItems = Align.center }
             rule(".${CssClasses.NAV_LINK}") {
                 fontFamily = Tokens.MONO
-                fontSize = 13.px
+                fontSize = 15.px
                 color = Tokens.MUTED
                 transition("color", 0.2.s)
             }
@@ -385,7 +401,7 @@ object Styles {
                 webkitTextFillColor(Color.transparent)
             }
             rule(".${CssClasses.METRIC_LABEL}") {
-                fontFamily = Tokens.MONO; fontSize = 12.px; color = Tokens.MUTED; marginTop = 8.px; lineHeight = LineHeight("1.4")
+                fontFamily = Tokens.MONO; fontSize = 13.5.px; color = Tokens.MUTED; marginTop = 8.px; lineHeight = LineHeight("1.4")
             }
 
             // --- Projects: expanding-panel accordion ---------------------------------------------
@@ -435,6 +451,15 @@ object Styles {
                 letterSpacing = (-0.01).em
                 color = Tokens.TEXT
             }
+            // Collapsed spines are narrow: turn the name vertical (and larger, since there's height to spare).
+            rule(".${CssClasses.PROJECT_PANEL}:not(.${CssClasses.IS_ACTIVE}) .${CssClasses.PROJECT_NAME}") {
+                important("writing-mode", "vertical-rl")
+                whiteSpace = WhiteSpace.nowrap
+                alignSelf = Align.center
+                marginTop = 8.px
+                fontSize = clamp(26.px, 2.6.vw, 36.px)
+                letterSpacing = 0.02.em
+            }
             // Detail stays in flow (clipped by the panel while collapsed) so opening only animates the
             // panel width; the text is faded in after the width settles, hiding the reflow.
             rule(".${CssClasses.PROJECT_DETAIL}") {
@@ -463,16 +488,75 @@ object Styles {
             rule(".${CssClasses.CARD_META}") { fontFamily = Tokens.MONO; fontSize = 11.px; color = Tokens.ACCENT }
 
             // --- Experience timeline -------------------------------------------------------------
-            rule(".${CssClasses.TIMELINE}") { position = Position.relative; display = Display.flex; flexDirection = FlexDirection.column }
+            rule(".${CssClasses.TIMELINE}") {
+                position = Position.relative
+                display = Display.flex
+                flexDirection = FlexDirection.column
+                maxWidth = 780.px
+            }
+            // A single warm blob (positioned by Effects.timeline) that slides smoothly behind the focused
+            // role. The gradient fades fully to transparent well inside its own box, so it reads as a soft
+            // amorphous cloud with no square edge, and bleeds left over the page bg.
+            // Knockout glow: a big warm blob that extends past the active card on every side, with the card's
+            // own rectangle punched out (mask-composite: exclude). The hole lets the aligned page grid show
+            // straight through, while the warm cloud wraps the whole card and bleeds out over the bg.
+            rule(".${CssClasses.TL_ROW}.${CssClasses.IS_ACTIVE} .${CssClasses.TL_MAIN}::after") {
+                content = QuotedString("")
+                position = Position.absolute
+                top = (-180).px; left = (-180).px; right = (-180).px; bottom = (-180).px
+                zIndex = -1
+                pointerEvents = PointerEvents.none
+                backgroundImage = radialGradient(shape = "closest-side", at = "50% 50%") {
+                    stop(Color("#ff7a1a").withAlpha(0.34))
+                    stop(Color("#f97316").withAlpha(0.17), 40.pct)
+                    stop(Color("#f43f5e").withAlpha(0.06), 70.pct)
+                    stop(Color.transparent)
+                }
+                // Two mask layers: a full cover minus a centred card-sized rectangle -> a card-shaped hole.
+                val fill = "linear-gradient(#000, #000)"
+                important("mask-image", "$fill, $fill")
+                important("mask-size", "100% 100%, calc(100% - 360px) calc(100% - 360px)")
+                important("mask-position", "center, center")
+                important("mask-repeat", "no-repeat, no-repeat")
+                important("mask-composite", "exclude")
+                important("-webkit-mask-image", "$fill, $fill")
+                important("-webkit-mask-size", "100% 100%, calc(100% - 360px) calc(100% - 360px)")
+                important("-webkit-mask-position", "center, center")
+                important("-webkit-mask-repeat", "no-repeat, no-repeat")
+                important("-webkit-mask-composite", "xor")
+                animation(breathe, 5.s, Timing("ease-in-out"), iterationCount = infinite)
+            }
+            // A bright spark of light running down the spine (sits on the spine, behind the node badges).
+            rule(".${CssClasses.TL_SPARK}") {
+                position = Position.absolute
+                left = 24.px
+                width = 8.px
+                height = 8.px
+                borderRadius = 50.pct
+                zIndex = 0
+                pointerEvents = PointerEvents.none
+                backgroundColor = Color("#ffe0b0")
+                boxShadow += BoxShadow(Color("#ff8a3a"), 0.px, 0.px, 16.px, 3.px)
+                animation(sparkKf, 3.6.s, Timing.linear, iterationCount = infinite)
+            }
             rule(".${CssClasses.TIMELINE}::before") {
                 content = QuotedString("")
                 position = Position.absolute
                 top = 20.px; bottom = 20.px
                 left = 27.px
                 width = 2.px
+                zIndex = 0
+                // Glowing spine through a warm/hot spectrum, sitting behind the nodes.
                 backgroundImage = linearGradient(direction = 180.deg) {
-                    stop(Color.transparent); stop(Tokens.LINE, 8.pct); stop(Tokens.LINE, 92.pct); stop(Color.transparent)
+                    stop(Color.transparent)
+                    stop(Color("#ff5e3a").withAlpha(0.9), 5.pct)
+                    stop(Color("#ff7a1a").withAlpha(0.9), 30.pct)
+                    stop(Color("#ffab2e").withAlpha(0.9), 50.pct)
+                    stop(Color("#f43f5e").withAlpha(0.85), 72.pct)
+                    stop(Tokens.SLATE.withAlpha(0.6), 90.pct)
+                    stop(Color.transparent)
                 }
+                boxShadow += BoxShadow(Color("#ff7a1a").withAlpha(0.45), 0.px, 0.px, 9.px)
             }
             rule(".${CssClasses.TL_ROW}") {
                 position = Position.relative
@@ -510,18 +594,49 @@ object Styles {
                     transition("transform", 0.6.s, Timing.ease, ((i - 1) * 0.08).s)
                 }
             }
+            // Every row carries the same horizontal inset, so the heading + years sit at a fixed x. The
+            // active card's outline then extends out into that inset without nudging any text.
             rule(".${CssClasses.TL_MAIN}") {
+                position = Position.relative
                 display = Display.flex
                 flexDirection = FlexDirection.column
-                paddingTop = 9.px
+                padding = Padding(11.px, 18.px)
                 transformOrigin("left center")
                 transition("transform", 0.3.s, Timing.ease)
                 transition("opacity", 0.3.s, Timing.ease)
             }
             // The open row scales up + brightens; the rest sit back a touch.
-            rule(".${CssClasses.TL_ROW}.${CssClasses.IS_ACTIVE} .${CssClasses.TL_MAIN}") { transform { scale(1.04) } }
-            rule(".${CssClasses.TL_ROW}:not(.${CssClasses.IS_ACTIVE}) .${CssClasses.TL_MAIN}") { opacity = 0.5 }
+            // The open role sits in a blue-outlined card (over the fixed inset) wired back to the spine.
+            rule(".${CssClasses.TL_ROW}.${CssClasses.IS_ACTIVE} .${CssClasses.TL_MAIN}") {
+                // Transparent interior: the outline frames the role and the page grid shows straight through.
+                backgroundColor = Color.transparent
+                border = Border(1.px, BorderStyle.solid, Tokens.ACCENT)
+                borderRadius = 10.px
+                boxShadow += BoxShadow(Tokens.ACCENT.withAlpha(0.28), 0.px, 0.px, 26.px, (-8).px)
+            }
+            // Connector: a short blue line joining the card's left edge back to the node on the spine.
+            rule(".${CssClasses.TL_ROW}.${CssClasses.IS_ACTIVE} .${CssClasses.TL_MAIN}::before") {
+                content = QuotedString("")
+                position = Position.absolute
+                top = 21.px
+                left = (-20).px
+                width = 20.px
+                height = 2.px
+                backgroundColor = Tokens.ACCENT
+                boxShadow += BoxShadow(Tokens.ACCENT.withAlpha(0.5), 0.px, 0.px, 6.px)
+            }
+            rule(".${CssClasses.TL_ROW}:not(.${CssClasses.IS_ACTIVE}) .${CssClasses.TL_MAIN}") { opacity = 0.72 }
             rule(".${CssClasses.TL_ROW}.${CssClasses.IS_ACTIVE} .${CssClasses.TL_NODE}") { transform { scale(1.15) } }
+            // Beacon: a warm ring that pulses out of the active node, marking the focused role.
+            rule(".${CssClasses.TL_ROW}.${CssClasses.IS_ACTIVE} .${CssClasses.TL_NODE}::after") {
+                content = QuotedString("")
+                position = Position.absolute
+                top = 0.px; left = 0.px; right = 0.px; bottom = 0.px
+                borderRadius = 50.pct
+                border = Border(2.px, BorderStyle.solid, Color("#ff8a3a"))
+                pointerEvents = PointerEvents.none
+                animation(beacon, 2.4.s, Timing("ease-out"), iterationCount = infinite)
+            }
             rule(".${CssClasses.TL_HEAD}") {
                 display = Display.flex
                 alignItems = Align.baseline
@@ -532,6 +647,12 @@ object Styles {
             rule(".${CssClasses.TL_WHAT}") { fontFamily = Tokens.MONO; fontSize = 13.px }
             rule(".${CssClasses.TL_WHEN}") {
                 fontFamily = Tokens.MONO; fontSize = 12.px; color = Tokens.MUTED; marginLeft = LinearDimension.auto
+                transition("color", 0.3.s, Timing.ease)
+            }
+            // Focused role lights its date range bright blue, echoing the card outline.
+            rule(".${CssClasses.TL_ROW}.${CssClasses.IS_ACTIVE} .${CssClasses.TL_WHEN}") {
+                color = Color("#5aa2ff")
+                textShadow += TextShadow(Color("#5aa2ff").withAlpha(0.55), 0.px, 0.px, 10.px)
             }
             // Body reveal: grid-rows 0fr→1fr animates the height smoothly with no known target height.
             rule(".${CssClasses.TL_DETAIL}") {
@@ -555,7 +676,7 @@ object Styles {
                 color = Tokens.MUTED; fontSize = 14.px; lineHeight = LineHeight("1.5"); marginTop = 8.px; maxWidth = 62.ch
             }
             // "Haze of time" for the unshown early-career years: just glowing motes drifting on the
-            // page background (no mist/fade) — revealed when the row is opened.
+            // page background (no mist/fade), revealed when the row is opened.
             rule(".${CssClasses.HAZE}") {
                 position = Position.relative
                 height = 64.px

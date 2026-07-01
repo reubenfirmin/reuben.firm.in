@@ -47,9 +47,10 @@ class PageRenderTest {
     fun featuredProjectLinkIsPresent() {
         renderPage()
         try {
+            val first = Content.projects.first()
             assertNotNull(
-                document.querySelector("a[href='https://the.do.zone']"),
-                "The Do Zone project link is present",
+                document.querySelector("a[href='${first.url}']"),
+                "The first project (${first.name}) link is present",
             )
         } finally {
             cleanup()

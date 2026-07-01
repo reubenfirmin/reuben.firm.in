@@ -122,6 +122,10 @@ object Deck {
         dots.forEachIndexed { i, d ->
             if (i == index) d.classList.add(CssClasses.IS_ACTIVE) else d.classList.remove(CssClasses.IS_ACTIVE)
         }
+        // Flag the current panel so per-section effects (e.g. the references cycle) only run once landed on.
+        panels.forEachIndexed { i, p ->
+            if (i == index) p.classList.add(CssClasses.IS_CURRENT) else p.classList.remove(CssClasses.IS_CURRENT)
+        }
         val panelId = panels.getOrNull(index)?.id
         for (sec in DomIds.navSections) {
             val item = document.getElementById(DomIds.navLinkId(sec)) ?: continue

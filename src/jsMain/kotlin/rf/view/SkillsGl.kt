@@ -17,8 +17,8 @@ import kotlin.math.sqrt
 import kotlin.random.Random
 
 /** The skills constellation, rendered with three.js: real 3D depth (fog + perspective) and crisp HTML
- *  labels via CSS2DRenderer (always facing the reader). The graph is one group we rotate directly —
- *  drag to spin freely (no pole lock), auto-rotating when idle; the front cluster reveals its labels.
+ *  labels via CSS2DRenderer (always facing the reader). The graph is one group we rotate directly:
+ *  drag to spin freely, auto-rotating when idle; the front cluster reveals its labels.
  *  A toggle morphs between the 3D sphere and a flat 2D radial map (positions lerp, lines follow). A
  *  search box rotates the globe to the strongest-matching cluster. */
 object SkillsGl {

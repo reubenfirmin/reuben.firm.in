@@ -75,6 +75,8 @@ object CssClasses {
     // Experience
     const val IS_VISIBLE = "is-visible"
     const val TIMELINE = "timeline"
+    const val TL_SPARK = "tl-spark"
+    const val IS_CURRENT = "is-current"
     const val HAZE = "haze"
     const val HAZE_MOTE = "haze-mote"
     const val TL_NODE = "tl-node"

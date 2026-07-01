@@ -113,7 +113,7 @@ object Content {
         Project(
             "The Do Zone", "Private, offline-first task manager",
             "A keyboard-driven \"3D kanban\" PWA: local-first, sync-enabled, and open source. Built on zoned.",
-            listOf("Kotlin/JS", "PWA", "Local-first"), "https://the.do.zone",
+            listOf("Kotlin/JS", "PWA", "Local-first"), "https://github.com/reubenfirmin/thedozone",
         ),
         Project(
             "bui", "Sandbox untrusted code, without the bwrap flags",
@@ -121,8 +121,13 @@ object Content {
             listOf("Python", "TUI", "Sandboxing"), "https://github.com/reubenfirmin/bubblewrap-tui",
         ),
         Project(
+            "TuneConsole", "A music recommender you can actually tune",
+            "Learns a transparent, tunable model of your taste from your own library, discovers its distinct \"taste modes\", and drives new-artist discovery, rediscoveries, and auto-generated playlists. A local, fully inspectable alternative to a streaming service's black-box recommender.",
+            listOf("Python", "ML", "Recommenders", "HTMX", "Alpine.js"), "https://github.com/reubenfirmin/tuneconsole",
+        ),
+        Project(
             "zoned", "Typesafe full-stack web apps in Kotlin",
-            "SQL to CSS to routes — everything typed Kotlin, no raw strings.",
+            "SQL to CSS to routes: everything typed Kotlin, no raw strings.",
             listOf("Kotlin", "Framework", "HTMX"), "https://github.com/reubenfirmin/zoned", meta = "this site runs on it",
         ),
         Project(
@@ -137,8 +142,8 @@ object Content {
         ),
         Project(
             "reuben.firm.in", "The site you're on",
-            "A scroll-hijack rolodex deck with a draggable WebGL skills globe that morphs into a 2D tree. Typed Kotlin/JS on zoned, three.js, shipped on Cloudflare.",
-            listOf("Kotlin/JS", "three.js", "Cloudflare"), "https://reuben.firm.in", meta = "you're looking at it",
+            "A card-deck single-pager with a draggable WebGL skills globe that morphs into a 2D tree. Typed Kotlin/JS on zoned, three.js, shipped on Cloudflare.",
+            listOf("Kotlin/JS", "three.js", "Cloudflare"), "https://github.com/reubenfirmin/reuben.firm.in", meta = "you're looking at it",
         ),
     )
 
@@ -147,19 +152,19 @@ object Content {
     data class Role(val period: String, val org: String, val title: String, val body: String, val color: String)
     val roles = listOf(
         Role("2023 - now", "4rc.io", "Fractional CTO / CISO",
-            "Fractional technology leadership for early-stage startups: architecture, product, security (SOC 2 / ISO 27001), and AI engineering.", "#4f7cff"),
+            "Fractional technology leadership for early-stage startups: architecture, product, security (SOC 2 / ISO 27001), and AI engineering.", "#ff5e3a"),
         Role("2022 - 2023", "Mediafly", "VP Engineering",
-            "Joined via the ExecVision acquisition. Integrated the platform into Mediafly and ran technical diligence for a strategic acquisition.", "#2dd4bf"),
+            "Joined via the ExecVision acquisition. Integrated the platform into Mediafly and ran technical diligence for a strategic acquisition.", "#ffab2e"),
         Role("2015 - 2022", "ExecVision", "CTO",
-            "Built the org and product from prototype to a successful acquisition. Scaled a fully-remote team to 25 engineers; owned SOC 2, architecture, and hands-on code.", "#10b981"),
+            "Built the org and product from prototype to a successful acquisition. Scaled a fully-remote team to 25 engineers; owned SOC 2, architecture, and hands-on code.", "#ff7a1a"),
         Role("2013 - 2015", "4rc.io", "Founder / Virtual CTO",
-            "Consulting CTO for early-stage startups: product, architecture, team sourcing, hands-on coding. Three successful engagements, culminating in ExecVision.", "#4f7cff"),
+            "Consulting CTO for early-stage startups: product, architecture, team sourcing, hands-on coding. Three successful engagements, culminating in ExecVision.", "#ff5e3a"),
         Role("2010 - 2013", "Catalist", "Chief Architect",
-            "Set technical direction for big-data microtargeting products; managed teams and coded hands-on.", "#8b5cf6"),
+            "Set technical direction for big-data microtargeting products; managed teams and coded hands-on.", "#f43f5e"),
     )
 
     /** Education, shown at the foot of the timeline (after the animated gap for the early-career years). */
-    val degree = Role("1999", "University of Aberdeen", "BSc (Hons), Computer Science", "Summa cum laude.", "#94a3b8")
+    val degree = Role("1999", "University of Aberdeen", "BSc (Hons), Computer Science", "Summa cum laude.", "#c99a6a")
 
     /** Skills constellation: each domain is a hub, its [skills] the leaf nodes. */
     data class SkillDomain(val name: String, val color: String, val skills: List<String>)
@@ -168,9 +173,9 @@ object Content {
         SkillDomain("Architecture", "#2dd4bf", listOf("System design", "Scalability", "REST APIs", "Design patterns")),
         SkillDomain("Security", "#10b981", listOf("SOC 2", "ISO 27001", "Compliance programs")),
         SkillDomain("Languages", "#8b5cf6", listOf("Kotlin", "Python", "Scala", "Go", "Rust", "TypeScript")),
-        SkillDomain("Data", "#f59e0b", listOf("PostgreSQL", "Elasticsearch", "Data architecture", "SQL")),
+        SkillDomain("Data", "#f59e0b", listOf("PostgreSQL", "SQLite", "Redis", "Elasticsearch", "Data architecture", "SQL")),
         SkillDomain("AI", "#38bdf8", listOf("AI engineering", "LLM integration", "ML pipelines", "Team adoption")),
-        SkillDomain("DevOps", "#f472b6", listOf("Cloudflare", "Fly.io", "Render", "Docker", "Podman", "Shell scripting", "AWS", "Linux")),
+        SkillDomain("DevOps", "#f472b6", listOf("Cloudflare", "Fly.io", "Render", "Docker", "Podman", "Shell scripting", "AWS", "Linux", "Observability", "GitOps")),
     )
 
     /** Contact links (label to href), each with a typed icon for the card. */
