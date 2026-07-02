@@ -8,7 +8,7 @@ import zoned.framework.tags.svg
 /** Classy inline icons as typed SVG. Line icons use `currentColor` for stroke, brand marks for fill,
  *  so the card's color (and its hover shift) flows straight through. */
 fun FlowContent.contactIcon(icon: Content.ContactIcon) {
-    svg(classes = CssClasses.CONTACT_ICON) {
+    svg(classes = CONTACT_ICON) {
         viewBox = "0 0 24 24"
         when (icon) {
             Content.ContactIcon.MAIL -> {

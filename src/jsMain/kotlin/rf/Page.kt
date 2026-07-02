@@ -3,7 +3,7 @@ package rf
 import kotlinx.html.TagConsumer
 import kotlinx.html.div
 import kotlinx.html.id
-import rf.view.CssClasses
+import rf.view.*
 import rf.view.Deck
 import rf.view.DomIds
 import rf.view.Effects
@@ -29,7 +29,7 @@ class Page {
         div {
             id = DomIds.APP_ROOT
             header()
-            div(classes = CssClasses.DECK) {
+            div(classes = DECK) {
                 hero()
                 proof()
                 projects()
@@ -37,10 +37,10 @@ class Page {
                 skills()
                 contactSection()
             }
-            div(classes = CssClasses.DECK_METER) {
-                div(classes = CssClasses.DECK_METER_TRACK) { div(classes = CssClasses.DECK_METER_FILL) {} }
-                div(classes = CssClasses.DECK_DOTS) {
-                    DomIds.sections.forEach { div(classes = CssClasses.DECK_DOT) {} }
+            div(classes = DECK_METER) {
+                div(classes = DECK_METER_TRACK) { div(classes = DECK_METER_FILL) {} }
+                div(classes = DECK_DOTS) {
+                    DomIds.sections.forEach { div(classes = DECK_DOT) {} }
                 }
             }
         }

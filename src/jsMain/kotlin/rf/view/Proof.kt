@@ -16,28 +16,28 @@ private fun monogram(t: Content.Testimonial) = (t.org ?: t.name).first().upperca
 fun FlowContent.proof() {
     pageSection(DomIds.PROOF) {
         monoLabel("what people say")
-        div(classes = CssClasses.SPOTLIGHT) {
+        div(classes = SPOTLIGHT) {
             Content.testimonials.forEachIndexed { i, t ->
                 val accent = Color(QUOTE_HEX[i % QUOTE_HEX.size])
-                val active = if (i == 0) " ${CssClasses.IS_ACTIVE}" else ""
-                div(classes = "${CssClasses.TESTIMONIAL_CARD}$active") {
-                    span(classes = CssClasses.TESTIMONIAL_MARK) { css { color = accent }; +"“" }
-                    p(classes = CssClasses.TESTIMONIAL_QUOTE) {
+                val active = if (i == 0) " ${IS_ACTIVE}" else ""
+                div(classes = "${TESTIMONIAL_CARD}$active") {
+                    span(classes = TESTIMONIAL_MARK) { css { color = accent }; +"“" }
+                    p(classes = TESTIMONIAL_QUOTE) {
                         // Each word is its own inline-block so it can transform on reveal; the space
                         // goes between spans as a plain text node (inline-block trims inner trailing spaces).
                         t.quote.split(" ").forEach { w ->
-                            span(classes = CssClasses.TESTIMONIAL_WORD) { +w }
+                            span(classes = TESTIMONIAL_WORD) { +w }
                             +" "
                         }
                     }
-                    div(classes = CssClasses.TESTIMONIAL_AUTHOR) {
-                        span(classes = CssClasses.TESTIMONIAL_BADGE) {
+                    div(classes = TESTIMONIAL_AUTHOR) {
+                        span(classes = TESTIMONIAL_BADGE) {
                             css { color = accent; borderColor = accent }
                             +monogram(t)
                         }
                         div {
-                            div(classes = CssClasses.TESTIMONIAL_NAME) { +t.name }
-                            div(classes = CssClasses.TESTIMONIAL_META) {
+                            div(classes = TESTIMONIAL_NAME) { +t.name }
+                            div(classes = TESTIMONIAL_META) {
                                 +t.title
                                 t.org?.let { org -> +", "; span { css { color = accent }; +org } }
                             }
@@ -46,24 +46,24 @@ fun FlowContent.proof() {
                 }
             }
         }
-        div(classes = CssClasses.SPOTLIGHT_RAIL) {
+        div(classes = SPOTLIGHT_RAIL) {
             Content.testimonials.forEachIndexed { i, t ->
-                val active = if (i == 0) " ${CssClasses.IS_ACTIVE}" else ""
-                span(classes = "${CssClasses.SPOTLIGHT_CHIP}$active") {
+                val active = if (i == 0) " ${IS_ACTIVE}" else ""
+                span(classes = "${SPOTLIGHT_CHIP}$active") {
                     attributes[Attrs.ACCENT_HEX] = QUOTE_HEX[i % QUOTE_HEX.size]
                     +monogram(t)
                 }
             }
         }
-        div(classes = CssClasses.SPOTLIGHT_PROGRESS) { div(classes = CssClasses.SPOTLIGHT_PROGRESS_FILL) {} }
-        div(classes = "${CssClasses.METRIC_BAND} ${CssClasses.REVEAL}") {
+        div(classes = SPOTLIGHT_PROGRESS) { div(classes = SPOTLIGHT_PROGRESS_FILL) {} }
+        div(classes = "${METRIC_BAND} ${REVEAL}") {
             Content.metrics.forEach { m ->
-                div(classes = CssClasses.METRIC) {
-                    div(classes = CssClasses.METRIC_VALUE) {
+                div(classes = METRIC) {
+                    div(classes = METRIC_VALUE) {
                         span { attributes[Attrs.COUNT_TO] = m.value.toString(); +"0" }
                         +m.suffix
                     }
-                    div(classes = CssClasses.METRIC_LABEL) { +m.label }
+                    div(classes = METRIC_LABEL) { +m.label }
                 }
             }
         }

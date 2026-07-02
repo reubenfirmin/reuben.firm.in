@@ -25,21 +25,21 @@ object Effects {
 
     // --- Experience timeline accordion: hovering / focusing a role expands its body ---------------
     private fun timeline() {
-        val rowNodes = document.getElementsByClassName(CssClasses.TL_ROW)
+        val rowNodes = document.getElementsByClassName(TL_ROW)
         val rows = (0 until rowNodes.length)
             .mapNotNull { rowNodes.item(it) as? HTMLElement }
-            .filter { it.querySelector(".${CssClasses.TL_DETAIL}") != null }
+            .filter { it.querySelector(".${TL_DETAIL}") != null }
         if (rows.isEmpty()) return
         // Fractional CTO / CISO is the default-open row; the timeline reverts to it whenever the
         // pointer isn't on it, so panning into the pane always shows that role open.
         val defaultIdx = rows.indexOfFirst { (it.textContent ?: "").contains("Fractional CTO") }.coerceAtLeast(0)
         fun open(i: Int) {
             rows.forEachIndexed { j, r ->
-                if (j == i) r.classList.add(CssClasses.IS_ACTIVE) else r.classList.remove(CssClasses.IS_ACTIVE)
+                if (j == i) r.classList.add(IS_ACTIVE) else r.classList.remove(IS_ACTIVE)
             }
         }
         rows.forEachIndexed { i, r -> r.addEventListener("pointerenter", { _: Event -> open(i) }) }
-        document.querySelector(".${CssClasses.TIMELINE}")?.addEventListener("pointerleave", { _: Event -> open(defaultIdx) })
+        document.querySelector(".${TIMELINE}")?.addEventListener("pointerleave", { _: Event -> open(defaultIdx) })
         open(defaultIdx)
     }
 
@@ -47,20 +47,20 @@ object Effects {
     private const val SPOTLIGHT_MS = 5200.0
 
     private fun spotlight() {
-        val root = document.querySelector(".${CssClasses.SPOTLIGHT}") as? HTMLElement ?: return
+        val root = document.querySelector(".${SPOTLIGHT}") as? HTMLElement ?: return
         // The references panel: the cycle only advances once the deck has landed here, so Carson (index 0)
         // is what the reader sees first rather than a mid-rotation card.
-        val panel = root.closest(".${CssClasses.SECTION}") as? HTMLElement
-        val cardNodes = root.getElementsByClassName(CssClasses.TESTIMONIAL_CARD)
+        val panel = root.closest(".${SECTION}") as? HTMLElement
+        val cardNodes = root.getElementsByClassName(TESTIMONIAL_CARD)
         val cards = (0 until cardNodes.length).mapNotNull { cardNodes.item(it) as? HTMLElement }
         if (cards.isEmpty()) return
-        val chipNodes = document.getElementsByClassName(CssClasses.SPOTLIGHT_CHIP)
+        val chipNodes = document.getElementsByClassName(SPOTLIGHT_CHIP)
         val chips = (0 until chipNodes.length).mapNotNull { chipNodes.item(it) as? HTMLElement }
-        val fill = document.querySelector(".${CssClasses.SPOTLIGHT_PROGRESS_FILL}") as? HTMLElement
+        val fill = document.querySelector(".${SPOTLIGHT_PROGRESS_FILL}") as? HTMLElement
 
         // Stagger each card's words so they rise in sequence when the card becomes active.
         for (card in cards) {
-            val words = card.getElementsByClassName(CssClasses.TESTIMONIAL_WORD)
+            val words = card.getElementsByClassName(TESTIMONIAL_WORD)
             for (k in 0 until words.length) {
                 (words.item(k) as? HTMLElement)?.style?.transitionDelay = "${k * 14}ms"
             }
@@ -74,17 +74,17 @@ object Effects {
 
         fun show(i: Int) {
             cards.forEachIndexed { j, c ->
-                if (j == i) c.classList.add(CssClasses.IS_ACTIVE) else c.classList.remove(CssClasses.IS_ACTIVE)
+                if (j == i) c.classList.add(IS_ACTIVE) else c.classList.remove(IS_ACTIVE)
             }
             chips.forEachIndexed { j, c ->
                 val accent = c.getAttribute(Attrs.ACCENT_HEX) ?: ""
                 if (j == i) {
-                    c.classList.add(CssClasses.IS_ACTIVE)
+                    c.classList.add(IS_ACTIVE)
                     c.style.backgroundColor = accent
                     c.style.borderColor = accent
                     fill?.style?.backgroundColor = accent
                 } else {
-                    c.classList.remove(CssClasses.IS_ACTIVE)
+                    c.classList.remove(IS_ACTIVE)
                     c.style.backgroundColor = ""
                     c.style.borderColor = ""
                 }
@@ -102,7 +102,7 @@ object Effects {
             if (prev == 0.0) { prev = ts; lastAdvance = ts }
             val dt = ts - prev
             prev = ts
-            val landed = panel?.classList?.contains(CssClasses.IS_CURRENT) ?: true
+            val landed = panel?.classList?.contains(IS_CURRENT) ?: true
             if (hovered || !landed) {
                 lastAdvance += dt // freeze the meter while the reader hovers, or before the panel is landed on
             } else {
@@ -152,7 +152,7 @@ object Effects {
 
     // --- Magnetic CTAs ----------------------------------------------------------------------------
     private fun magnetic() {
-        val els = document.getElementsByClassName(CssClasses.CTA)
+        val els = document.getElementsByClassName(CTA)
         for (i in 0 until els.length) {
             val el = els.item(i) as? HTMLElement ?: continue
             el.addEventListener("pointermove", { e: Event ->
@@ -168,17 +168,17 @@ object Effects {
 
     // --- Projects accordion: hovering / focusing a panel expands it, collapsing the others --------
     private fun projects() {
-        val panelNodes = document.getElementsByClassName(CssClasses.PROJECT_PANEL)
+        val panelNodes = document.getElementsByClassName(PROJECT_PANEL)
         val panels = (0 until panelNodes.length).mapNotNull { panelNodes.item(it) as? HTMLElement }
         if (panels.isEmpty()) return
 
         fun open(i: Int) {
             panels.forEachIndexed { j, p ->
                 if (j == i) {
-                    p.classList.add(CssClasses.IS_ACTIVE)
+                    p.classList.add(IS_ACTIVE)
                     p.style.borderColor = p.getAttribute(Attrs.ACCENT_HEX) ?: ""
                 } else {
-                    p.classList.remove(CssClasses.IS_ACTIVE)
+                    p.classList.remove(IS_ACTIVE)
                     p.style.borderColor = ""
                 }
             }

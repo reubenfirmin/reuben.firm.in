@@ -131,9 +131,9 @@ object Content {
             listOf("Kotlin", "Framework", "HTMX"), "https://github.com/reubenfirmin/zoned", meta = "this site runs on it",
         ),
         Project(
-            "dq", "A faster, friendlier du",
-            "Answers \"what's eating my disk?\" fast: skips virtual and cross-device mounts, human-readable and sorted by default. A lean single-binary tool in Rust.",
-            listOf("Rust"), "https://github.com/reubenfirmin/dq",
+            "qtools", "What's eating my disk, CPU, or memory?",
+            "A small suite of fast, visual Linux CLI tools: dq (disk query) recurses across a thread pool and skips virtual/cross-device mounts; pq (process query) clusters processes by resolved identity, not just executable name. Donut charts on capable terminals, JSON for machines.",
+            listOf("Rust"), "https://github.com/reubenfirmin/qtools",
         ),
         Project(
             "wildcams", "Local ML pipeline for wildlife cameras",
@@ -172,9 +172,10 @@ object Content {
         SkillDomain("Leadership", "#4f7cff", listOf("Fractional CTO / CISO", "Team building", "M&A diligence", "Agile / Scrum")),
         SkillDomain("Architecture", "#2dd4bf", listOf("System design", "Scalability", "REST APIs", "Design patterns")),
         SkillDomain("Security", "#10b981", listOf("SOC 2", "ISO 27001", "Compliance programs")),
-        SkillDomain("Languages", "#8b5cf6", listOf("Kotlin", "Python", "Scala", "Go", "Rust", "TypeScript")),
+        SkillDomain("Languages", "#8b5cf6", listOf("Kotlin", "Python", "Java", "Rust", "TypeScript")),
+        SkillDomain("Web", "#ef4444", listOf("CSS", "Svelte", "HTMX", "Tailwind", "React", "Chrome Extensions")),
         SkillDomain("Data", "#f59e0b", listOf("PostgreSQL", "SQLite", "Redis", "Elasticsearch", "Data architecture", "SQL")),
-        SkillDomain("AI", "#38bdf8", listOf("AI engineering", "LLM integration", "ML pipelines", "Team adoption")),
+        SkillDomain("AI", "#38bdf8", listOf("AI engineering", "LLM integration", "RAG", "ML pipelines", "Team adoption")),
         SkillDomain("DevOps", "#f472b6", listOf("Cloudflare", "Fly.io", "Render", "Docker", "Podman", "Shell scripting", "AWS", "Linux", "Observability", "GitOps")),
     )
 

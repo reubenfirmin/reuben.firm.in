@@ -14,26 +14,26 @@ private val PROJECT_HEX = listOf("#5b74ff", "#a855f7", "#2b47ff", "#38bdf8", "#2
 fun FlowContent.projects() {
     pageSection(DomIds.PROJECTS) {
         monoLabel("selected projects")
-        div(classes = CssClasses.PROJECTS) {
+        div(classes = PROJECTS) {
             Content.projects.forEachIndexed { i, project ->
                 val hex = PROJECT_HEX[i % PROJECT_HEX.size]
                 val accent = Color(hex)
-                val open = if (i == 0) " ${CssClasses.IS_ACTIVE}" else ""
-                a(classes = "${CssClasses.PROJECT_PANEL}$open") {
+                val open = if (i == 0) " ${IS_ACTIVE}" else ""
+                a(classes = "${PROJECT_PANEL}$open") {
                     href = project.url; target = "_blank"
                     attributes[Attrs.ACCENT_HEX] = hex
-                    span(classes = CssClasses.PROJECT_INDEX) {
+                    span(classes = PROJECT_INDEX) {
                         css { color = accent }
                         +(i + 1).toString().padStart(2, '0')
                     }
-                    div(classes = CssClasses.PROJECT_NAME) { +project.name }
-                    div(classes = CssClasses.PROJECT_DETAIL) {
-                        div(classes = CssClasses.PROJECT_TAGLINE) { css { color = accent }; +project.tagline }
-                        p(classes = CssClasses.PROJECT_BLURB) { +project.blurb }
-                        div(classes = CssClasses.TAG_ROW) {
-                            project.tags.forEach { tag -> span(classes = CssClasses.TAG) { +tag } }
+                    div(classes = PROJECT_NAME) { +project.name }
+                    div(classes = PROJECT_DETAIL) {
+                        div(classes = PROJECT_TAGLINE) { css { color = accent }; +project.tagline }
+                        p(classes = PROJECT_BLURB) { +project.blurb }
+                        div(classes = TAG_ROW) {
+                            project.tags.forEach { tag -> span(classes = TAG) { +tag } }
                         }
-                        project.meta?.let { div(classes = CssClasses.CARD_META) { +"↳ $it" } }
+                        project.meta?.let { div(classes = CARD_META) { +"↳ $it" } }
                     }
                 }
             }

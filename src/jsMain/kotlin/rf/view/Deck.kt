@@ -29,12 +29,12 @@ object Deck {
     private const val FLIP_MS = 680.0   // lock-out while the flip plays
 
     fun install() {
-        val nodes = document.querySelectorAll(".${CssClasses.DECK} > .${CssClasses.SECTION}")
+        val nodes = document.querySelectorAll(".${DECK} > .${SECTION}")
         panels = (0 until nodes.length).mapNotNull { nodes.item(it) as? HTMLElement }
         if (panels.isEmpty()) return
-        val dotNodes = document.querySelectorAll(".${CssClasses.DECK_DOT}")
+        val dotNodes = document.querySelectorAll(".${DECK_DOT}")
         dots = (0 until dotNodes.length).mapNotNull { dotNodes.item(it) as? HTMLElement }
-        meterFill = document.querySelector(".${CssClasses.DECK_METER_FILL}") as? HTMLElement
+        meterFill = document.querySelector(".${DECK_METER_FILL}") as? HTMLElement
 
         applyLayout()
         activate()
@@ -49,7 +49,7 @@ object Deck {
             el.addEventListener("click", { _: Event -> el.getAttribute(Attrs.SCROLL_TARGET)?.let(::goToId) })
         }
         // Per-card "next" chevrons advance the deck.
-        val nextButtons = document.querySelectorAll(".${CssClasses.DECK_NEXT}")
+        val nextButtons = document.querySelectorAll(".${DECK_NEXT}")
         for (i in 0 until nextButtons.length) {
             val el = nextButtons.item(i) as? HTMLElement ?: continue
             el.addEventListener("click", { _: Event -> go(1) })
@@ -120,22 +120,22 @@ object Deck {
 
     private fun activate() {
         dots.forEachIndexed { i, d ->
-            if (i == index) d.classList.add(CssClasses.IS_ACTIVE) else d.classList.remove(CssClasses.IS_ACTIVE)
+            if (i == index) d.classList.add(IS_ACTIVE) else d.classList.remove(IS_ACTIVE)
         }
         // Flag the current panel so per-section effects (e.g. the references cycle) only run once landed on.
         panels.forEachIndexed { i, p ->
-            if (i == index) p.classList.add(CssClasses.IS_CURRENT) else p.classList.remove(CssClasses.IS_CURRENT)
+            if (i == index) p.classList.add(IS_CURRENT) else p.classList.remove(IS_CURRENT)
         }
         val panelId = panels.getOrNull(index)?.id
         for (sec in DomIds.navSections) {
             val item = document.getElementById(DomIds.navLinkId(sec)) ?: continue
-            if (sec.id == panelId) item.classList.add(CssClasses.IS_ACTIVE) else item.classList.remove(CssClasses.IS_ACTIVE)
+            if (sec.id == panelId) item.classList.add(IS_ACTIVE) else item.classList.remove(IS_ACTIVE)
         }
         val panel = panels.getOrNull(index) ?: return
-        val reveals = panel.getElementsByClassName(CssClasses.REVEAL)
+        val reveals = panel.getElementsByClassName(REVEAL)
         for (i in 0 until reveals.length) {
             val el = reveals.item(i) as? HTMLElement ?: continue
-            if (revealed.add(el)) el.classList.add(CssClasses.REVEALED)
+            if (revealed.add(el)) el.classList.add(REVEALED)
         }
         val nums = panel.querySelectorAll("[${Attrs.COUNT_TO}]")
         for (i in 0 until nums.length) {

@@ -12,9 +12,9 @@ import zoned.framework.interop.css
 fun FlowContent.experienceSection() {
     pageSection(DomIds.EXPERIENCE, reveal = false) {
         monoLabel("experience")
-        div(classes = CssClasses.TIMELINE) {
+        div(classes = TIMELINE) {
             // A spark of light that runs continuously down the spine.
-            div(classes = CssClasses.TL_SPARK) {}
+            div(classes = TL_SPARK) {}
             Content.roles.forEachIndexed { i, r -> timelineRow(r, active = i == 0) }
             hazeRow()
             timelineRow(Content.degree, active = false)
@@ -24,23 +24,23 @@ fun FlowContent.experienceSection() {
 
 private fun FlowContent.timelineRow(r: Content.Role, active: Boolean) {
     val c = Color(r.color)
-    val cls = "${CssClasses.TL_ROW} ${CssClasses.REVEAL}" + if (active) " ${CssClasses.IS_ACTIVE}" else ""
+    val cls = "${TL_ROW} ${REVEAL}" + if (active) " ${IS_ACTIVE}" else ""
     div(classes = cls) {
-        div(classes = CssClasses.TL_NODE) {
+        div(classes = TL_NODE) {
             css {
                 borderColor = c; backgroundColor = c
                 boxShadow += BoxShadow(c.withAlpha(0.5), 0.px, 0.px, 18.px, (-5).px)
             }
-            span(classes = CssClasses.TL_MONO) { css { color = Tokens.BG }; +monogram(r.org) }
+            span(classes = TL_MONO) { css { color = Tokens.BG }; +monogram(r.org) }
         }
-        div(classes = CssClasses.TL_MAIN) {
-            div(classes = CssClasses.TL_HEAD) {
-                span(classes = CssClasses.TL_ROLE) { +r.title }
-                span(classes = CssClasses.TL_WHAT) { css { color = c }; +r.org }
-                span(classes = CssClasses.TL_WHEN) { +r.period }
+        div(classes = TL_MAIN) {
+            div(classes = TL_HEAD) {
+                span(classes = TL_ROLE) { +r.title }
+                span(classes = TL_WHAT) { css { color = c }; +r.org }
+                span(classes = TL_WHEN) { +r.period }
             }
             // Inner wrapper so the grid-rows 0fr→1fr reveal can clip the body cleanly.
-            div(classes = CssClasses.TL_DETAIL) { div { p(classes = CssClasses.TL_BODY) { +r.body } } }
+            div(classes = TL_DETAIL) { div { p(classes = TL_BODY) { +r.body } } }
         }
     }
 }
@@ -48,21 +48,21 @@ private fun FlowContent.timelineRow(r: Content.Role, active: Boolean) {
 /** A blurred, drifting "haze of time" standing in for the unshown early-career years (degree → Catalist).
  *  Slate-toned to sit in the timeline's muted "pre-history" tier alongside Catalist and the degree. */
 private fun FlowContent.hazeRow() {
-    div(classes = "${CssClasses.TL_ROW} ${CssClasses.REVEAL}") {
-        div(classes = CssClasses.TL_NODE) {
+    div(classes = "${TL_ROW} ${REVEAL}") {
+        div(classes = TL_NODE) {
             css {
                 borderColor = Tokens.SLATE; backgroundColor = Tokens.SLATE
                 boxShadow += BoxShadow(Tokens.SLATE.withAlpha(0.45), 0.px, 0.px, 18.px, (-5).px)
             }
-            span(classes = CssClasses.TL_MONO) { css { color = Tokens.BG }; +"~" }
+            span(classes = TL_MONO) { css { color = Tokens.BG }; +"~" }
         }
-        div(classes = CssClasses.TL_MAIN) {
-            div(classes = CssClasses.TL_HEAD) {
-                span(classes = CssClasses.TL_ROLE) { +"Earlier engineering" }
-                span(classes = CssClasses.TL_WHEN) { +"1999 - 2010" }
+        div(classes = TL_MAIN) {
+            div(classes = TL_HEAD) {
+                span(classes = TL_ROLE) { +"Earlier engineering" }
+                span(classes = TL_WHEN) { +"1999 - 2010" }
             }
-            div(classes = CssClasses.TL_DETAIL) {
-                div { div(classes = CssClasses.HAZE) { repeat(18) { span(classes = CssClasses.HAZE_MOTE) {} } } }
+            div(classes = TL_DETAIL) {
+                div { div(classes = HAZE) { repeat(18) { span(classes = HAZE_MOTE) {} } } }
             }
         }
     }

@@ -39,8 +39,8 @@ object SectionNavigator {
         }
         for (sec in DomIds.navSections) {
             val item = document.getElementById(DomIds.navLinkId(sec)) ?: continue
-            if (sec.id == active.id) item.classList.add(CssClasses.IS_ACTIVE)
-            else item.classList.remove(CssClasses.IS_ACTIVE)
+            if (sec.id == active.id) item.classList.add(IS_ACTIVE)
+            else item.classList.remove(IS_ACTIVE)
         }
     }
 }

@@ -1,7 +1,7 @@
 package rf
 
 import kotlinx.browser.document
-import rf.view.CssClasses
+import rf.view.*
 import rf.view.DomIds
 import zoned.framework.interop.addToBody
 import zoned.framework.routing.Params
@@ -36,7 +36,7 @@ class PageRenderTest {
     fun headerHasOneNavLinkPerNavSection() {
         renderPage()
         try {
-            val items = document.querySelectorAll(".${CssClasses.NAV_LINK}")
+            val items = document.querySelectorAll(".${NAV_LINK}")
             assertEquals(DomIds.navSections.size, items.length, "one nav link per nav section")
         } finally {
             cleanup()
